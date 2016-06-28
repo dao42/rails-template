@@ -38,6 +38,7 @@ say 'Applying figaro...'
 gem 'figaro'
 get_remote('config/application.yml.example')
 get_remote('config/application.yml')
+get_remote('config/spring.rb')
 
 # bootstrap sass
 say 'Applying bootstrap3...'
