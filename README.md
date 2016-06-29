@@ -30,11 +30,11 @@ Then,
 
 1. Add `gems.ruby-china.org` to your bundle mirrors(optional)
 
-`$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org`
+    `$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org`
 
 2. Creating your rails app applying rails template
 
-`$ rails new myapp -m https://raw.github.com/80percent/rails-template/master/composer.rb`
+    `$ rails new myapp -m https://raw.github.com/80percent/rails-template/master/composer.rb`
 
 ## What we do
 
