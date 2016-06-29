@@ -126,6 +126,7 @@ gem_group :test do
 end
 
 get_remote 'README.md'
+gsub_file 'README.md', /myapp/, "#{app_name}"
 
 after_bundle do
   generate 'testing:configure', 'rspec --force'
