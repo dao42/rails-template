@@ -2,6 +2,8 @@
 
 A best & newest & fastest rails template for chinese senior rails developer.
 
+It's a best start for your new rails project.
+
 ## How to use
 
 Install dependencies:
@@ -10,38 +12,45 @@ Install dependencies:
 
     `$ brew install postgresql`
 
-    Initalize a user with username: `postgres` and password: `postgres`
+    Ensure you have already initalize a user with username: `postgres` and password: `postgres`( e.g. `$ createdb -d postgres` )
 
-* rails5
+* rails 5
 
     `$ brew install rbenv`
 
     `$ rbenv install 2.2.3`
 
+    `$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/`
+
     `$ gem install rails --pre`
 
+    `$ rails -v` ( output should be rails5.x )
 
-Add `gems.ruby-china.org` to your bundle mirrors(optional)
+Then,
+
+1. Add `gems.ruby-china.org` to your bundle mirrors(optional)
 
 `$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org`
 
-Create your rails app with applying rails template
+2. Creating your rails app applying rails template
 
 `$ rails new myapp -m https://raw.github.com/80percent/rails-template/master/composer.rb`
 
 ## What we do
 
-`rails-template` apply lots of good components for you to let us develop our products damn quickly.
+`rails-template` apply lots of good components for you to make development damn quick.
 
-First, we use `Ruby on Rails 5`, `ActionCable` and `Turbolinks` features are opened by default.
+1. we use `Ruby on Rails 5`, `ActionCable` and `Turbolinks` features are opened by default.
 
-`Bootstrap3` and `font-awesome` are integrated to make your products UI easily, it aslo has some example pages for you to quickly start.
+2. `Bootstrap3` and `font-awesome` are integrated to make your products UI easily, it aslo has some example pages for you to quickly start.
 
-`carriewave` and `carriewave-upyun` are integrated.
+3. `carriewave` and `carriewave-upyun` are integrated.
 
-`mina` and its plugins are the best & simplest deployment tools in the world for rails app.
+4. `mina` and its plugins are the best & simplest deployment tools in the world for rails app.
 
-Other gems we gave that you should see seriously.
+5. `slim`, `rspec`, `high_voltage` and so on.
+
+Other gems integrated in rails-template are worth learning seriously.
 
 ## Integrated mainly technology stack
 
@@ -58,6 +67,11 @@ Other gems we gave that you should see seriously.
 * mina
 * puma
 * lograge
+
+## TODO
+
+* wiki for more detail introduce
+* deployment step by step
 
 ## Thanks
 
