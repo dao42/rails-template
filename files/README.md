@@ -6,7 +6,7 @@ The source code of myapp
 * Ruby on Rails 5
 * bootstrap 3
 * font-awesome
-* figrao
+* figaro
 * postgres
 * slim
 * high_voltage
