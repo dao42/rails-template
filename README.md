@@ -34,7 +34,7 @@ Then,
 
     `$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org`
 
-2. Creating your rails app applying rails template
+2. Create your own rails app applying `rails-template`
 
     `$ rails new myapp -m https://raw.github.com/80percent/rails-template/master/composer.rb`
 
@@ -75,9 +75,18 @@ Other gems integrated in rails-template are worth learning seriously.
 * wiki for more detail introduce
 * deployment step by step
 
+## Projects that using `rails-template`
+
+Welcome to pull request to update this if you choose `rails-template` for your new rails app.
+
+* [八十二十](https://80post.com)
+* [sunesy 尚艺(开发中)](http://sunesy_develop.80percent.io)
+* [pausee 衣橱(开发中)](http://pausee.80percent.io)
+* Waiting for more examples here...
+
 ## Thanks
 
-80percent team
+[80percent team](https://www.80percent.io)
 
 ## LICENSE
 
