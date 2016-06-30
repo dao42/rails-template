@@ -62,6 +62,7 @@ Other gems integrated in rails-template are worth learning seriously.
 * figrao
 * postgres
 * slim
+* simple_form
 * high_voltage
 * carriewave & upyun
 * sidekiq

@@ -47,6 +47,12 @@ remove_file 'app/assets/stylesheets/application.css'
 get_remote('application.scss', 'app/assets/stylesheets/application.scss')
 inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery\n" do "//= require bootstrap-sprockets\n" end
 
+say 'Applying simple_form...'
+gem 'simple_form'
+after_bundle do
+  generate 'simple_form:install', '--bootstrap'
+end
+
 say 'Applying font-awesome & slim & high_voltage...'
 gem 'font-awesome-sass'
 gem 'slim-rails'
@@ -124,13 +130,15 @@ gem_group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
+after_bundle do
+  generate 'testing:configure', 'rspec --force'
+end
 
 get_remote 'README.md'
 gsub_file 'README.md', /myapp/, "#{app_name}"
 
 after_bundle do
-  generate 'testing:configure', 'rspec --force'
-  say 'Done! init `git` and `database`'
+  say 'Done! init `git` and `database`...'
   git :init
   git add: '.'
   git commit: '-m "init rails"'
