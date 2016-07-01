@@ -15,6 +15,11 @@ def get_remote(src, dest = nil)
   remove_file dest
   get(remote_file, dest)
 end
+say 'Applying action cable config...'
+inject_into_file 'config/environments/production.rb', after: "# Mount Action Cable outside main process or domain\n" do <<-EOF
+  config.action_cable.allowed_request_origins = [ "\#{ENV['PROTOCOL']}://\#{ENV['DOMAIN']}" ]
+EOF
+end
 
 remove_comment_of_gem
 # gitignore
@@ -28,16 +33,16 @@ get_remote('config/database.yml.example')
 gsub_file "config/database.yml.example", /database: myapp_development/, "database: #{app_name}_development"
 gsub_file "config/database.yml.example", /database: myapp_test/, "database: #{app_name}_test"
 gsub_file "config/database.yml.example", /database: myapp_production/, "database: #{app_name}_production"
-get_remote('config/database.yml')
+get_remote('config/database.yml.example', 'config/database.yml')
 gsub_file "config/database.yml", /database: myapp_development/, "database: #{app_name}_development"
 gsub_file "config/database.yml", /database: myapp_test/, "database: #{app_name}_test"
 gsub_file "config/database.yml", /database: myapp_production/, "database: #{app_name}_production"
 
-# environment variables
+# environment variables set
 say 'Applying figaro...'
 gem 'figaro'
 get_remote('config/application.yml.example')
-get_remote('config/application.yml')
+get_remote('config/application.yml.example', 'config/application.yml')
 get_remote('config/spring.rb')
 
 # bootstrap sass
@@ -64,6 +69,12 @@ remove_file('app/views/layouts/application.html.erb')
 get_remote('application.html.slim', 'app/views/layouts/application.html.slim')
 gsub_file 'app/views/layouts/application.html.slim', /myapp/, "#{app_name}"
 
+say 'Applying action cable config...'
+inject_into_file 'config/environments/production.rb', after: "# Mount Action Cable outside main process or domain\n" do <<-EOF
+  config.action_cable.allowed_request_origins = [ "#{ENV['PROTOCOL']}://#{ENV['DOMAIN']}" ]
+EOF
+end
+
 # initialize files
 # uploader directory
 # application.yml
@@ -81,7 +92,7 @@ get_remote('config/initializers/status_page.rb')
 say 'Applying redis & sidekiq...'
 gem 'redis-namespace'
 gem 'sidekiq'
-gem 'sinatra', github: '80percent/sinatra', require: false
+gem 'sinatra', github: 'sinatra', require: false
 get_remote('config/initializers/sidekiq.rb')
 get_remote('config/routes.rb')
 
