@@ -18,15 +18,15 @@ Install dependencies:
 
 * rails 5
 
-    `$ brew install rbenv`
+    Update `ruby` up to 2.2 or higher, and install `rails 5`
 
-    `$ rbenv install 2.2.3`
+    `$ ruby -v` ( output should be 2.2.x or 2.3.x )
 
-    `$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/`
+    `$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/` (optional)
 
-    `$ gem install rails --pre`
+    `$ gem install rails`
 
-    `$ rails -v` ( output should be rails5.x )
+    `$ rails -v` ( output should be rails 5.x )
 
 Then,
 

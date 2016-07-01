@@ -81,7 +81,7 @@ get_remote('config/initializers/status_page.rb')
 say 'Applying redis & sidekiq...'
 gem 'redis-namespace'
 gem 'sidekiq'
-gem 'sinatra', github: 'sinatra', require: false
+gem 'sinatra', github: '80percent/sinatra', require: false
 get_remote('config/initializers/sidekiq.rb')
 get_remote('config/routes.rb')
 
