@@ -1,0 +1,3 @@
+--ignore-file=ext:log
+--ignore-dir=public
+--ignore-dir=tmp

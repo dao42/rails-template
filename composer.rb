@@ -88,6 +88,10 @@ get_remote('config/routes.rb')
 say 'Applying kaminari & rails-i18n...'
 gem 'kaminari', github: 'amatsuda/kaminari'
 gem 'rails-i18n', '~> 5.0.0.beta1'
+after_bundle do
+  generate 'kaminari:config'
+  generate 'kaminari:views', 'bootstrap3'
+end
 
 say 'Applying mina & its plugin...'
 gem 'mina-puma', require: false
@@ -136,6 +140,8 @@ end
 
 get_remote 'README.md'
 gsub_file 'README.md', /myapp/, "#{app_name}"
+# `ack` is a really quick tool for searching code
+get_remote 'ackrc', '.ackrc'
 
 after_bundle do
   say 'Done! init `git` and `database`...'
