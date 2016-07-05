@@ -59,7 +59,7 @@ Other gems integrated in rails-template are worth learning seriously.
 * Ruby on Rails 5
 * bootstrap 3
 * font-awesome
-* figrao
+* figaro
 * postgres
 * slim
 * simple_form
