@@ -14,7 +14,7 @@ Install dependencies:
 
     `$ brew install postgresql`
 
-    Ensure you have already initalize a user with username: `postgres` and password: `postgres`( e.g. `$ createdb -d postgres` )
+    Ensure you have already initalized a user with username: `postgres` and password: `postgres`( e.g. `$ createdb -d postgres` )
 
 * rails 5
 
