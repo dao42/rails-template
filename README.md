@@ -14,7 +14,7 @@ Install dependencies:
 
     `$ brew install postgresql`
 
-    Ensure you have already initalized a user with username: `postgres` and password: `postgres`( e.g. `$ createdb -d postgres` )
+    Ensure you have already initalized a user with username: `postgres` and password: `postgres`( e.g. `$ createuser -d postgres` )
 
 * rails 5
 
@@ -30,7 +30,7 @@ Install dependencies:
 
 Then,
 
-1. Add `gems.ruby-china.org` to your bundle mirrors(optional)
+1. Add `gems.ruby-china.org` to your bundle mirrors (optional)
 
     `$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org`
 
