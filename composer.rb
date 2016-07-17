@@ -15,11 +15,6 @@ def get_remote(src, dest = nil)
   remove_file dest
   get(remote_file, dest)
 end
-say 'Applying action cable config...'
-inject_into_file 'config/environments/production.rb', after: "# Mount Action Cable outside main process or domain\n" do <<-EOF
-  config.action_cable.allowed_request_origins = [ "\#{ENV['PROTOCOL']}://\#{ENV['DOMAIN']}" ]
-EOF
-end
 
 remove_comment_of_gem
 # gitignore
