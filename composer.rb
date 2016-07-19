@@ -93,7 +93,7 @@ get_remote('config/routes.rb')
 
 say 'Applying kaminari & rails-i18n...'
 gem 'kaminari', github: 'amatsuda/kaminari'
-gem 'rails-i18n', '~> 5.0.0.beta1'
+gem 'rails-i18n', '~> 5.0.0'
 after_bundle do
   generate 'kaminari:config'
   generate 'kaminari:views', 'bootstrap3'
