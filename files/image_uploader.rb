@@ -7,8 +7,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def filename
     if super.present?
-      prefix = SecureRandom.uuid.gsub("-","")
-      "#{prefix}.#{file.extension.downcase}"
+      @prefix ||= SecureRandom.uuid.gsub("-","")
+      "#{@prefix}.#{file.extension.downcase}"
     end
   end
 end
