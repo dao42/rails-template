@@ -84,6 +84,12 @@ say 'Applying status page...'
 gem 'status-page'
 get_remote('config/initializers/status_page.rb')
 
+say "Applying browser_warrior..."
+gem 'browser_warrior'
+after_bundle do
+  generate 'browser_warrior:install'
+end
+
 say 'Applying redis & sidekiq...'
 gem 'redis-namespace'
 gem 'sidekiq'
