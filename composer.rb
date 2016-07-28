@@ -94,6 +94,7 @@ say 'Applying redis & sidekiq...'
 gem 'redis-namespace'
 gem 'sidekiq'
 gem 'sinatra', github: 'sinatra', require: false
+gem 'rack-protection', github: 'sinatra/rack-protection', require: false
 get_remote('config/initializers/sidekiq.rb')
 get_remote('config/routes.rb')
 
