@@ -118,6 +118,8 @@ get_remote('config/deploy/production.rb')
 gsub_file 'config/deploy/production.rb', /\/data\/www\/myapp/, "/data/www/#{app_name}"
 get_remote('config/nginx.conf.example')
 gsub_file 'config/nginx.conf.example', /myapp/, "#{app_name}"
+get_remote('config/logrotate.conf.example')
+gsub_file 'config/logrotate.conf.example', /myapp/, "#{app_name}"
 
 say 'Applying lograge & basic application config...'
 gem 'lograge'
