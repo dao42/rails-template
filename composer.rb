@@ -40,6 +40,11 @@ get_remote('config/application.yml.example')
 get_remote('config/application.yml.example', 'config/application.yml')
 get_remote('config/spring.rb')
 
+after_bundle do
+  say "Stop spring if exsit"
+  run "spring stop"
+end
+
 # bootstrap sass
 say 'Applying bootstrap3...'
 gem 'bootstrap-sass'
@@ -94,7 +99,6 @@ say 'Applying redis & sidekiq...'
 gem 'redis-namespace'
 gem 'sidekiq'
 gem 'sinatra', github: 'sinatra', require: false
-gem 'rack-protection', github: 'sinatra/rack-protection', require: false
 get_remote('config/initializers/sidekiq.rb')
 get_remote('config/routes.rb')
 
@@ -106,7 +110,7 @@ after_bundle do
   generate 'kaminari:views', 'bootstrap3'
 end
 
-say 'Applying mina & its plugin...'
+say 'Applying mina & its plugins...'
 gem 'mina-puma', require: false
 gem 'mina-multistage', '~> 1.0', '>= 1.0.2', require: false
 gem 'mina-sidekiq', '~> 0.3.1', require: false
@@ -165,5 +169,5 @@ after_bundle do
   git commit: '-m "init rails"'
 
   rake 'db:create'
-  say 'Build successfully! Use `rails s` to start your rails app...'
+  say "Build successfully! `cd #{app_name}` and use `rails s` to start your rails app..."
 end
