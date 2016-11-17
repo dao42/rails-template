@@ -111,7 +111,8 @@ after_bundle do
 end
 
 say 'Applying mina & its plugins...'
-gem 'mina-puma', require: false
+gem 'mina', '0.3.8', require: false
+gem 'mina-puma', '1.0.2', require: false
 gem 'mina-multistage', '~> 1.0', '>= 1.0.2', require: false
 gem 'mina-sidekiq', '~> 0.3.1', require: false
 gem 'mina-logs', '>= 0.1.0', require: false
