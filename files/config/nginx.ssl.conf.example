@@ -16,12 +16,15 @@ server {
   ssl on;
   ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
-  ssl_ciphers AESGCM:HIGH:!aNULL:!MD5;
   # ssl optimizations
   ssl_session_cache shared:SSL:30m;
   ssl_session_timeout 30m;
   add_header Strict-Transport-Security "max-age=31536000";
+
+  ssl_prefer_server_ciphers on;
+  ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
 
   location ^~ /assets/ {
     gzip_static on;
