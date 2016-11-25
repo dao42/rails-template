@@ -3,9 +3,19 @@ upstream myapp {
 }
 
 server {
-  listen 80;
+  listen 443 ssl http2;
   server_name example.com;
   root /data/www/myapp/current/public;
+
+  ssl on;
+  ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+  ssl_ciphers AESGCM:HIGH:!aNULL:!MD5;
+  # ssl optimizations
+  ssl_session_cache shared:SSL:30m;
+  ssl_session_timeout 30m;
+  add_header Strict-Transport-Security "max-age=31536000";
 
   location ^~ /assets/ {
     gzip_static on;
@@ -13,31 +23,33 @@ server {
     add_header Cache-Control public;
   }
 
-  location /cable {
-    proxy_pass http://myapp;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "Upgrade";
-    proxy_set_header   Host             $host;
-    proxy_set_header   X-Real-IP        $remote_addr;
-    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-  }
-
   location ~ ^/(uploads)/  {
     expires max;
     break;
   }
 
+  location /cable {
+    proxy_pass http://myapp;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header   Host             $host;
+    proxy_set_header   X-Real-IP        $remote_addr;
+    proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+  }
 
   try_files $uri/index.html $uri @myapp;
   location @myapp {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $http_host;
+    proxy_set_header X-Forwarded-Proto $scheme;
     proxy_redirect off;
     proxy_pass http://myapp;
   }
 
-  error_page 500 502 503 504 /500.html;
+  error_page 500 502 503 504 /500;
+  error_page 404 /404;
   client_max_body_size 20M;
   keepalive_timeout 10;
 }
