@@ -12,6 +12,7 @@ require 'mina/logs'
 
 set :shared_paths, ['config/database.yml', 'config/application.yml', 'log', 'public/uploads']
 set :puma_config, ->{ "#{deploy_to}/#{current_path}/config/puma.rb" }
+set :sidekiq_pid, ->{ "#{deploy_to}/#{shared_path}/tmp/pids/sidekiq.pid" }
 
 task :environment do
   invoke :'rbenv:load'
