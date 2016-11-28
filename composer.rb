@@ -71,7 +71,7 @@ gsub_file 'app/views/layouts/application.html.slim', /myapp/, "#{app_name}"
 
 say 'Applying action cable config...'
 inject_into_file 'config/environments/production.rb', after: "# Mount Action Cable outside main process or domain\n" do <<-EOF
-  config.action_cable.allowed_request_origins = [ "#{ENV['PROTOCOL']}://#{ENV['DOMAIN']}" ]
+  config.action_cable.allowed_request_origins = [ "\#{ENV['PROTOCOL']}://\#{ENV['DOMAIN']}" ]
 EOF
 end
 
