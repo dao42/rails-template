@@ -9,6 +9,8 @@ if ENV['RAILS_ENV'] == 'production'
   threads 8, 16
   preload_app!
 
+  stdout_redirect "#{app_root}/log/puma_access.log", "#{app_root}/log/puma_error.log", true
+
   on_worker_boot do
     ActiveSupport.on_load(:active_record) do
       ActiveRecord::Base.establish_connection
