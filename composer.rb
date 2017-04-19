@@ -61,7 +61,7 @@ end
 say 'Applying font-awesome & slim & high_voltage...'
 gem 'font-awesome-sass'
 gem 'slim-rails'
-gem 'high_voltage', :github=>"thoughtbot/high_voltage"
+gem 'high_voltage', '~> 3.0.0'
 get_remote('visitors_controller.rb', 'app/controllers/visitors_controller.rb')
 get_remote('index.html.slim', 'app/views/visitors/index.html.slim')
 get_remote('about.html.slim', 'app/views/pages/about.html.slim')
@@ -98,23 +98,22 @@ end
 say 'Applying redis & sidekiq...'
 gem 'redis-namespace'
 gem 'sidekiq'
-gem 'sinatra', github: 'sinatra', require: false
 get_remote('config/initializers/sidekiq.rb')
 get_remote('config/routes.rb')
 
 say 'Applying kaminari & rails-i18n...'
-gem 'kaminari', github: 'amatsuda/kaminari'
-gem 'rails-i18n', '~> 5.0.0'
+gem 'kaminari', '~> 1.0.1'
+gem 'rails-i18n', '~> 5.0.3'
 after_bundle do
   generate 'kaminari:config'
   generate 'kaminari:views', 'bootstrap3'
 end
 
 say 'Applying mina & its plugins...'
-gem 'mina', '0.3.8', require: false
-gem 'mina-puma', '0.3.2', require: false
-gem 'mina-multistage', '~> 1.0', '>= 1.0.2', require: false
-gem 'mina-sidekiq', '~> 0.3.1', require: false
+gem 'mina', '~> 1.0.6', require: false
+gem 'mina-puma', '~> 1.0.1', require: false
+gem 'mina-multistage', '~> 1.0.3', require: false
+gem 'mina-sidekiq', '~> 1.0.1', require: false
 gem 'mina-logs', '>= 0.1.0', require: false
 get_remote('config/deploy.rb')
 get_remote('config/puma.rb')
