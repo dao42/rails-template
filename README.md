@@ -71,19 +71,17 @@ Other gems integrated in rails-template are worth learning seriously.
 * puma
 * lograge
 
-## TODO
+## Deployment document
 
-* wiki for more detail introduce
-* deployment step by step
+* [How to deploy to ubuntu 14.04 with rails-template step by step(zh-CN)](https://github.com/80percent/rails-template/wiki/how-to-deploy-rails-to-ubuntu1404-with-rails-template)
 
 ## Projects that using `rails-template`
 
 Welcome to pull request to update this if you choose `rails-template` for your new rails app.
 
 * [八十二十](https://80post.com)
-* [sunesy 尚艺](http://app.sunesy.com)
+* [创业沙拉](https://salad.co)
 * [pausee 衣橱](http://pausee.cn)
-* Waiting for more examples here...
 
 ## Thanks
 
