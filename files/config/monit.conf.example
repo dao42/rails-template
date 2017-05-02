@@ -2,6 +2,7 @@
 # Usage:
 # `sudo apt-get install monit -y`
 # `cp monit.conf.example /etc/monit/conf.d/`
+# `service monit restart`
 check process myapp_puma
   with pidfile /data/www/myapp/shared/tmp/pids/puma.pid
   start program = "/bin/sh -c 'cd /data/www/myapp/current; PATH=bin:/home/ruby/.rbenv/shims:/home/ruby/.rbenv/bin:$PATH RAILS_ENV="production" bundle exec puma -q -d -e production -C config/puma.rb'" as uid ruby and gid ruby with timeout 90 seconds
