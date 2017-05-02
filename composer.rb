@@ -68,6 +68,7 @@ get_remote('about.html.slim', 'app/views/pages/about.html.slim')
 remove_file('app/views/layouts/application.html.erb')
 get_remote('application.html.slim', 'app/views/layouts/application.html.slim')
 gsub_file 'app/views/layouts/application.html.slim', /myapp/, "#{app_name}"
+get_remote('favicon.ico', 'app/assets/images/favicon.ico')
 
 say 'Applying action cable config...'
 inject_into_file 'config/environments/production.rb', after: "# Mount Action Cable outside main process or domain\n" do <<-EOF
