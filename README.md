@@ -1,5 +1,7 @@
 # rails-template
 
+**rails-template has supported the newest rails( 5.1 ) setup**
+
 A best & newest & fastest rails template for chinese senior rails developer.
 
 It's a best start for your new rails project.
@@ -18,15 +20,15 @@ Install dependencies:
 
 * rails 5
 
-    Update `ruby` up to 2.2 or higher, and install `rails 5`
+    Update `ruby` up to 2.2 or higher, and install `rails 5.1`
 
-    `$ ruby -v` ( output should be 2.2.x or 2.3.x )
+    `$ ruby -v` ( output should be 2.2.x or 2.3.x or 2.4.x )
 
     `$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/` (optional)
 
     `$ gem install rails`
 
-    `$ rails -v` ( output should be rails 5.x )
+    `$ rails -v` ( output should be rails 5.1.x )
 
 Then,
 
