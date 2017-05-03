@@ -2,8 +2,13 @@
 
 /db/*.sqlite3
 
-/log/*.log
-/tmp
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+/node_modules
+/yarn-error.log
 
 *.swp
 
