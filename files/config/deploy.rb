@@ -1,7 +1,6 @@
 set :stages, %w(production)
 set :default_stage, 'production'
 
-require 'mina/multistage'
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
@@ -9,6 +8,7 @@ require 'mina/rbenv'
 require 'mina/puma'
 require "mina_sidekiq/tasks"
 require 'mina/logs'
+require 'mina/multistage'
 
 set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/uploads')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/application.yml')
