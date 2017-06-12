@@ -45,12 +45,17 @@ after_bundle do
   run "spring stop"
 end
 
+# jquery, bootstrap needed
+say 'Applying jquery...'
+gem 'jquery-rails'
+inject_into_file 'app/assets/javascripts/application.js', after: "//= require rails-ujs\n" do "//= require jquery\n" end
+
 # bootstrap sass
 say 'Applying bootstrap3...'
 gem 'bootstrap-sass'
 remove_file 'app/assets/stylesheets/application.css'
 get_remote('application.scss', 'app/assets/stylesheets/application.scss')
-inject_into_file 'app/assets/javascripts/application.js', after: "//= require rails-ujs\n" do "//= require bootstrap-sprockets\n" end
+inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery\n" do "//= require bootstrap-sprockets\n" end
 
 say 'Applying simple_form...'
 gem 'simple_form', github: 'christiannelson/simple_form', branch: 'rails-5.1'
