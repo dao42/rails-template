@@ -58,7 +58,7 @@ get_remote('application.scss', 'app/assets/stylesheets/application.scss')
 inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery\n" do "//= require bootstrap-sprockets\n" end
 
 say 'Applying simple_form...'
-gem 'simple_form', github: 'christiannelson/simple_form', branch: 'rails-5.1'
+gem 'simple_form', '~> 3.5.0'
 after_bundle do
   generate 'simple_form:install', '--bootstrap'
 end
