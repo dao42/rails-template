@@ -136,6 +136,9 @@ gsub_file 'config/logrotate.conf.example', /myapp/, "#{app_name}"
 get_remote('config/monit.conf.example')
 gsub_file 'config/monit.conf.example', /myapp/, "#{app_name}"
 
+get_remote('config/backup.rb.example')
+gsub_file 'config/backup.rb.example', /myapp/, "#{app_name}"
+
 say 'Applying lograge & basic application config...'
 gem 'lograge'
 inject_into_file 'config/application.rb', after: "class Application < Rails::Application\n" do <<-EOF
