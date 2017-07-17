@@ -4,18 +4,24 @@ upstream myapp {
 
 server {
   listen 80;
+  # FIXME: update your domain here
   server_name example.com;
   return 301 https://$server_name$request_uri;
 }
 
 server {
   listen 443 ssl;
+  # FIXME: update your domain here
   server_name example.com;
   root /data/www/myapp/current/public;
 
   ssl on;
-  ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+  # FIXME: update your domain here
+  ssl_certificate  /etc/nginx/sslkeys/yourdomain.com.key.pem;
+  ssl_certificate_key /etc/nginx/sslkeys/yourdomain.com.key;
+  ssl_dhparam  /etc/nginx/sslkeys/dhparam.pem;
+
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
   # ssl optimizations
