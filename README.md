@@ -82,8 +82,8 @@ Other gems integrated in rails-template are worth learning seriously.
 Welcome to pull request to update this if you choose `rails-template` for your new rails app.
 
 * [八十二十](https://80post.com)
-* [创业沙拉](https://salad.co)
-* [pausee 衣橱](http://pausee.cn)
+* [单麦 - 单品电商平台](https://80danmai.com)
+* etc...
 
 ## Thanks
 
