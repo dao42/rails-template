@@ -17,6 +17,6 @@ check process myapp_sidekiq
 
 #check process myapp_clockwork
 #  with pidfile /data/www/myapp/shared/tmp/pids/clockworkd.clock.pid
-#  start program = "/bin/sh -c 'cd /data/www/myapp/current; PATH=bin:/home/ruby/.rbenv/shims:/home/ruby/.rbenv/bin:$PATH RAILS_ENV=production bundle exec clockworkd -c /data/www/myapp/current/config/clock.rb -i clock -d /data/www/myapp/current --pid-dir /data/www/myapp/shared/tmp/pids --log --log-dir /data/www/myapp/shared/log start'" as uid ruby and gid ruby with timeout 90 seconds
-#  stop program = "/bin/sh -c 'cd /data/www/myapp/current; PATH=bin:/home/ruby/.rbenv/shims:/home/ruby/.rbenv/bin:$PATH RAILS_ENV=production bundle exec clockworkd -c /data/www/myapp/current/config/clock.rb -i clock -d /data/www/myapp/current --pid-dir /data/www/myapp/shared/tmp/pids --log --log-dir /data/www/myapp/shared/log stop'" as uid ruby and gid ruby with timeout 90 seconds
+#  start program = "/bin/sh -c 'cd /data/www/myapp/current; PATH=bin:/home/ruby/.rbenv/shims:/home/ruby/.rbenv/bin:$PATH LC_ALL=en_US.UTF-8 RAILS_ENV=production bundle exec clockworkd -c /data/www/myapp/current/config/clock.rb -i clock -d /data/www/myapp/current --pid-dir /data/www/myapp/shared/tmp/pids --log --log-dir /data/www/myapp/shared/log start'" as uid ruby and gid ruby with timeout 90 seconds
+#  stop program = "/bin/sh -c 'cd /data/www/myapp/current; PATH=bin:/home/ruby/.rbenv/shims:/home/ruby/.rbenv/bin:$PATH LC_ALL=en_US.UTF-8 RAILS_ENV=production bundle exec clockworkd -c /data/www/myapp/current/config/clock.rb -i clock -d /data/www/myapp/current --pid-dir /data/www/myapp/shared/tmp/pids --log --log-dir /data/www/myapp/shared/log stop'" as uid ruby and gid ruby with timeout 90 seconds
 #  group myapp
