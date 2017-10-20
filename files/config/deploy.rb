@@ -76,11 +76,13 @@ task :first_deploy => :environment do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
+    invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     on :launch do
       invoke :'rbenv:load'
       invoke :'rails:db_create'
+      invoke :'rails:db_migrate'
     end
   end
 end
