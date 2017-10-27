@@ -116,10 +116,10 @@ after_bundle do
 end
 
 say 'Applying mina & its plugins...'
-gem 'mina', '~> 1.0.6', require: false
-gem 'mina-puma', '~> 1.0.1', require: false
+gem 'mina', '~> 1.2.2', require: false
+gem 'mina-puma', '~> 1.1.0', require: false
 gem 'mina-multistage', '~> 1.0.3', require: false
-gem 'mina-sidekiq', '~> 1.0.1', require: false
+gem 'mina-sidekiq', '~> 1.0.2', require: false
 gem 'mina-logs', '~> 1.0.1', require: false
 get_remote('config/deploy.rb')
 get_remote('config/puma.rb')
