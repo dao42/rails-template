@@ -67,8 +67,8 @@ say 'Applying font-awesome & slim & high_voltage...'
 gem 'font-awesome-sass'
 gem 'slim-rails'
 gem 'high_voltage', '~> 3.0.0'
-get_remote('visitors_controller.rb', 'app/controllers/visitors_controller.rb')
-get_remote('index.html.slim', 'app/views/visitors/index.html.slim')
+get_remote('home_controller.rb', 'app/controllers/home_controller.rb')
+get_remote('index.html.slim', 'app/views/home/index.html.slim')
 get_remote('about.html.slim', 'app/views/pages/about.html.slim')
 remove_file('app/views/layouts/application.html.erb')
 get_remote('application.html.slim', 'app/views/layouts/application.html.slim')
