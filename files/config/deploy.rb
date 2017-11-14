@@ -66,8 +66,8 @@ task :deploy do
   end
 end
 
-desc "Deploys the current version to the server."
-task :first_deploy => :environment do
+desc "Prepare the first deploy on server."
+task :first_deploy do
   command %[echo "-----> Server: #{fetch(:domain)}"]
   command %[echo "-----> Path: #{fetch(:deploy_to)}"]
   command %[echo "-----> Branch: #{fetch(:branch)}"]
