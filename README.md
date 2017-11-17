@@ -4,7 +4,7 @@
 
 A best & newest & fastest rails template for chinese senior rails developer.
 
-It's a best start for your new rails project.
+It's a best starting for your new rails project.
 
 An example built with rails-template: https://github.com/80percent/rails-template-example
 
