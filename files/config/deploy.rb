@@ -10,7 +10,7 @@ require "mina_sidekiq/tasks"
 require 'mina/logs'
 require 'mina/multistage'
 
-set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/uploads')
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/uploads', 'node_modules')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/application.yml')
 
 set :puma_config, ->{ "#{fetch(:current_path)}/config/puma.rb" }
@@ -32,6 +32,9 @@ task :setup do
 
   command %[mkdir -p "#{fetch(:shared_path)}/public/uploads"]
   command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/public/uploads"]
+
+  command %[mkdir -p "#{fetch(:shared_path)}/node_modules"]
+  command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/node_modules"]
 
   command %[mkdir -p "#{fetch(:shared_path)}/config"]
   command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/config"]
