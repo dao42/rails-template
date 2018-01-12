@@ -23,7 +23,7 @@ get_remote('gitignore', '.gitignore')
 # postgresql
 say 'Applying postgresql...'
 remove_gem('sqlite3')
-gem 'pg'
+gem 'pg', '0.18'
 get_remote('config/database.yml.example')
 gsub_file "config/database.yml.example", /database: myapp_development/, "database: #{app_name}_development"
 gsub_file "config/database.yml.example", /database: myapp_test/, "database: #{app_name}_test"
