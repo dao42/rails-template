@@ -151,6 +151,24 @@ inject_into_file 'config/application.rb', after: "class Application < Rails::App
 EOF
 end
 
+say 'Applying rspec test framework...'
+gem_group :development do
+  gem 'rails_apps_testing'
+end
+gem_group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+end
+gem_group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+end
+after_bundle do
+  generate 'testing:configure', 'rspec --force'
+end
+
 get_remote 'README.md'
 gsub_file 'README.md', /myapp/, "#{app_name}"
 # `ack` is a really quick tool for searching code

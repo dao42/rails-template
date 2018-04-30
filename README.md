@@ -20,7 +20,7 @@ Install dependencies:
 
 * rails 5
 
-    Update `ruby` up to 2.2 or higher, and install `rails 5.1`
+    Update `ruby` up to 2.2 or higher, and install `rails 5.2`
 
     `$ ruby -v` ( output should be 2.2.x or 2.3.x or 2.4.x )
 
@@ -28,7 +28,7 @@ Install dependencies:
 
     `$ gem install rails`
 
-    `$ rails -v` ( output should be rails 5.1.x )
+    `$ rails -v` ( output should be rails 5.2.x )
 
 Then,
 
@@ -44,11 +44,11 @@ Then,
 
 `rails-template` apply lots of good components for you to make development damn quick.
 
-1. we use `Ruby on Rails 5`, `ActionCable` and `Turbolinks` features are opened by default.
+1. we use `Ruby on Rails 5`. `ActionCable` and `Turbolinks` features are opened by default.
 
-2. `Bootstrap3` and `font-awesome` are integrated to make your products UI easily, it aslo has some example pages for you to quickly start.
+2. `Bootstrap4` and `font-awesome` are integrated to make your products UI easily, it aslo has some example pages for you to quickly start.
 
-3. `carriewave` and `carriewave-upyun` are integrated.
+3. `active_storage` and `local` file mode are opened by default.
 
 4. `mina` and its plugins are the best & simplest deployment tools in the world for rails app.
 
