@@ -3,14 +3,14 @@ The source code of myapp
 
 ## Tech stack
 
-* Ruby on Rails 5
-* bootstrap 3
+* Ruby on Rails 5.2
+* bootstrap 4
 * font-awesome
 * figaro
 * postgres
 * slim
 * high_voltage
-* carriewave & upyun
+* active_storage
 * sidekiq
 * kaminari
 * mina

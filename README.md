@@ -1,6 +1,6 @@
 # rails-template
 
-**rails-template has supported the newest rails( 5.1 ) setup**
+**rails-template has supported the newest rails( 5.2 ) setup**
 
 A best & newest & fastest rails template for chinese senior rails developer.
 
@@ -58,8 +58,8 @@ Other gems integrated in rails-template are worth learning seriously.
 
 ## Integrated mainly technology stack
 
-* Ruby on Rails 5
-* bootstrap 3
+* Ruby on Rails 5.2
+* bootstrap 4
 * font-awesome
 * figaro
 * postgres
@@ -83,7 +83,7 @@ Welcome to pull request to update this if you choose `rails-template` for your n
 
 * [八十二十](https://80post.com)
 * [单麦 - 单品电商平台](https://80danmai.com)
-* etc...
+* [天鸽小程序平台](https://www.tiange360.com)
 
 ## Thanks
 

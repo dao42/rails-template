@@ -14,9 +14,11 @@
 
 /public/uploads/*
 /public/assets/*
+/storage
 
 /config/application.yml
 /config/database.yml
+/config/master.key
 **.orig
 *.old
 *.bak

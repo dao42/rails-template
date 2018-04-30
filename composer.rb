@@ -11,6 +11,7 @@ end
 def get_remote(src, dest = nil)
   dest ||= src
   repo = 'https://raw.github.com/80percent/rails-template/master/files/'
+  #repo = File.join(File.dirname(__FILE__), 'files/')
   remote_file = repo + src
   remove_file dest
   get(remote_file, dest)
@@ -51,14 +52,14 @@ gem 'jquery-rails'
 inject_into_file 'app/assets/javascripts/application.js', after: "//= require rails-ujs\n" do "//= require jquery\n" end
 
 # bootstrap sass
-say 'Applying bootstrap3...'
-gem 'bootstrap-sass'
+say 'Applying bootstrap4...'
+gem 'bootstrap', '~> 4.1.0'
 remove_file 'app/assets/stylesheets/application.css'
 get_remote('application.scss', 'app/assets/stylesheets/application.scss')
-inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery\n" do "//= require bootstrap-sprockets\n" end
+inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery\n" do "//= require popper\n//= require bootstrap-sprockets\n" end
 
 say 'Applying simple_form...'
-gem 'simple_form', '~> 3.5.0'
+gem 'simple_form', '~> 4.0.0'
 after_bundle do
   generate 'simple_form:install', '--bootstrap'
 end
@@ -81,14 +82,11 @@ inject_into_file 'config/environments/production.rb', after: "# Mount Action Cab
 EOF
 end
 
-# initialize files
-# uploader directory
-# application.yml
-say 'Applying carrierwave & upyun...'
-gem 'carrierwave'
-gem 'carrierwave-upyun'
-get_remote('config/initializers/carrierwave.rb')
-get_remote('image_uploader.rb', 'app/uploaders/image_uploader.rb')
+# active_storage
+say 'Applying active_storage...'
+after_bundle do
+  rake 'active_storage:install'
+end
 
 # initialize files
 say 'Applying status page...'
@@ -96,7 +94,7 @@ gem 'status-page'
 get_remote('config/initializers/status_page.rb')
 
 say "Applying browser_warrior..."
-gem 'browser_warrior'
+gem 'browser_warrior', '>= 0.8.0'
 after_bundle do
   generate 'browser_warrior:install'
 end
@@ -108,11 +106,11 @@ get_remote('config/initializers/sidekiq.rb')
 get_remote('config/routes.rb')
 
 say 'Applying kaminari & rails-i18n...'
-gem 'kaminari', '~> 1.0.1'
+gem 'kaminari', '~> 1.1.1'
 gem 'rails-i18n', '~> 5.0.3'
 after_bundle do
   generate 'kaminari:config'
-  generate 'kaminari:views', 'bootstrap3'
+  generate 'kaminari:views', 'bootstrap4'
 end
 
 say 'Applying mina & its plugins...'
@@ -151,24 +149,6 @@ inject_into_file 'config/application.rb', after: "class Application < Rails::App
 
     config.lograge.enabled = true
 EOF
-end
-
-say 'Applying rspec test framework...'
-gem_group :development do
-  gem 'rails_apps_testing'
-end
-gem_group :development, :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
-end
-gem_group :test do
-  gem 'capybara'
-  gem 'database_cleaner'
-  gem 'launchy'
-  gem 'selenium-webdriver'
-end
-after_bundle do
-  generate 'testing:configure', 'rspec --force'
 end
 
 get_remote 'README.md'
