@@ -181,5 +181,6 @@ after_bundle do
   git commit: '-m "init rails"'
 
   rake 'db:create'
+  rake 'db:migrate'
   say "Build successfully! `cd #{app_name}` and use `rails s` to start your rails app..."
 end
