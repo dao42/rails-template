@@ -176,11 +176,10 @@ get_remote 'ackrc', '.ackrc'
 
 after_bundle do
   say 'Done! init `git` and `database`...'
+  rake 'db:create'
+  rake 'db:migrate'
   git :init
   git add: '.'
   git commit: '-m "init rails"'
-
-  rake 'db:create'
-  rake 'db:migrate'
   say "Build successfully! `cd #{app_name}` and use `rails s` to start your rails app..."
 end
