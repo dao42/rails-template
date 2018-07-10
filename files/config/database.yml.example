@@ -23,7 +23,7 @@ production:
   host:     localhost
   encoding: unicode
   database: myapp_production
-  pool:     50
+  pool:     16
   username: postgres
   password: postgres
   template: template0
