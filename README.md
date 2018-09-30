@@ -66,7 +66,7 @@ Other gems integrated in rails-template are worth learning seriously.
 * slim
 * simple_form
 * high_voltage
-* carriewave & upyun
+* active_storage & upyun
 * sidekiq
 * kaminari
 * mina
