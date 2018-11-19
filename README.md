@@ -83,7 +83,7 @@ Welcome to pull request to update this if you choose `rails-template` for your n
 
 * [八十二十](https://80post.com)
 * [单麦 - 单品电商平台](https://80danmai.com)
-* [天鸽小程序平台](https://www.tiange360.com)
+* [单麦小程序平台](https://www.danmai.com.cn)
 
 ## Thanks
 
