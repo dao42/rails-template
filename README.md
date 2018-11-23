@@ -24,7 +24,7 @@ Install dependencies:
 
     `$ ruby -v` ( output should be 2.2.x or 2.3.x or 2.4.x )
 
-    `$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/` (optional)
+    `$ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.com/` (optional)
 
     `$ gem install rails`
 
@@ -32,9 +32,9 @@ Install dependencies:
 
 Then,
 
-1. Add `gems.ruby-china.org` to your bundle mirrors (optional)
+1. Add `gems.ruby-china.com` to your bundle mirrors (optional)
 
-    `$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org`
+    `$ bundle config mirror.https://rubygems.org https://gems.ruby-china.com`
 
 2. Create your own rails app applying `rails-template`
 
