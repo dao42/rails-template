@@ -103,6 +103,7 @@ say 'Applying redis & sidekiq...'
 gem 'redis-namespace'
 gem 'sidekiq'
 get_remote('config/initializers/sidekiq.rb')
+get_remote('config/sidekiq.yml')
 get_remote('config/routes.rb')
 
 say 'Applying kaminari & rails-i18n...'
@@ -115,7 +116,7 @@ end
 
 say 'Applying mina & its plugins...'
 gem 'mina', '~> 1.2.2', require: false
-gem 'mina-puma', '~> 1.1.0', require: false
+gem 'mina-ng-puma', '~> 1.2.0', require: false
 gem 'mina-multistage', '~> 1.0.3', require: false
 gem 'mina-sidekiq', '~> 1.0.3', require: false
 gem 'mina-logs', '~> 1.1.0', require: false

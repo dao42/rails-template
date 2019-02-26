@@ -44,7 +44,7 @@ Then,
 
 `rails-template` apply lots of good components for you to make development damn quick.
 
-1. we use `Ruby on Rails 5`. `ActionCable` and `Turbolinks` features are opened by default.
+1. We use `Ruby on Rails 5`. `ActionCable` and `Turbolinks` features are opened by default.
 
 2. `Bootstrap4` and `font-awesome` are integrated to make your products UI easily, it aslo has some example pages for you to quickly start.
 
@@ -53,6 +53,8 @@ Then,
 4. `mina` and its plugins are the best & simplest deployment tools in the world for rails app.
 
 5. `slim`, `rspec`, `high_voltage` and so on.
+
+6. Zero-down restart mode with `mina-ng-puma`
 
 Other gems integrated in rails-template are worth learning seriously.
 

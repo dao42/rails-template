@@ -66,7 +66,7 @@ task :deploy do
 
     on :launch do
       invoke :'rbenv:load'
-      invoke :'puma:hard_restart'
+      invoke :'puma:phased_restart'
       invoke :'sidekiq:restart'
     end
   end
