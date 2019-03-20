@@ -42,7 +42,7 @@ get_remote('config/application.yml.example', 'config/application.yml')
 get_remote('config/spring.rb')
 
 after_bundle do
-  say "Stop spring if exsit"
+  say "Stop spring if exists"
   run "spring stop"
 end
 
