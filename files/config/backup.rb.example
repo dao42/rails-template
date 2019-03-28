@@ -26,5 +26,17 @@ Model.new(:myapp, 'Description for myapp') do
     local.keep       = 5
   end
 
+  # Use FTP instead of Local in production environments
+  #store_with FTP do |server|
+    #server.username     = ""
+    #server.password     = ""
+    #server.ip           = ""
+    #server.port         = 21
+    #server.path         = "~/backups/"
+    #server.keep         = 5
+    ## server.keep         = Time.now - 2592000 # Remove all backups older than 1 month.
+    #server.passive_mode = false
+  #end
+
   compress_with Gzip
 end
