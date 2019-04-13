@@ -1,3 +1,5 @@
 --ignore-file=ext:log
+--ignore-file=ext:svg
 --ignore-dir=public
 --ignore-dir=tmp
+--ignore-dir=node_modules
