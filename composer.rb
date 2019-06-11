@@ -49,7 +49,7 @@ end
 # jquery, bootstrap needed
 say 'Applying jquery...'
 gem 'jquery-rails'
-inject_into_file 'app/assets/javascripts/application.js', after: "//= require rails-ujs\n" do "//= require jquery\n" end
+inject_into_file 'app/assets/javascripts/application.js', after: "//= require rails-ujs\n" do "//= require jquery3\n" end
 
 # bootstrap sass
 say 'Applying bootstrap4...'
