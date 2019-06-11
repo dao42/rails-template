@@ -15,6 +15,7 @@
 /public/uploads/*
 /public/assets/*
 /storage
+/tags
 
 /config/application.yml
 /config/database.yml

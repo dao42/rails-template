@@ -11,5 +11,5 @@ UPYUN_PASSWORD: ''
 UPYUN_BUCKET: ''
 UPYUN_BUCKET_HOST: ''
 
-# sidekiq namespace
-SIDEKIQ_NAMESPACE: ''
+# sidekiq db
+SIDEKIQ_DB: '1'

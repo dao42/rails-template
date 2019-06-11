@@ -100,7 +100,6 @@ after_bundle do
 end
 
 say 'Applying redis & sidekiq...'
-gem 'redis-namespace'
 gem 'sidekiq'
 get_remote('config/initializers/sidekiq.rb')
 get_remote('config/sidekiq.yml')
