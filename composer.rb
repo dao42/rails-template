@@ -10,7 +10,7 @@ end
 
 def get_remote(src, dest = nil)
   dest ||= src
-  repo = 'https://raw.github.com/80percent/rails-template/master/files/'
+  repo = 'https://raw.github.com/dao42/rails-template/master/files/'
   #repo = File.join(File.dirname(__FILE__), 'files/')
   remote_file = repo + src
   remove_file dest
@@ -88,13 +88,8 @@ after_bundle do
   rake 'active_storage:install'
 end
 
-# initialize files
-say 'Applying status page...'
-gem 'status-page'
-get_remote('config/initializers/status_page.rb')
-
 say "Applying browser_warrior..."
-gem 'browser_warrior', '>= 0.8.0'
+gem 'browser_warrior', '>= 0.11.0'
 after_bundle do
   generate 'browser_warrior:install'
 end
@@ -107,7 +102,7 @@ get_remote('config/routes.rb')
 
 say 'Applying kaminari & rails-i18n...'
 gem 'kaminari', '~> 1.1.1'
-gem 'rails-i18n', '~> 5.0.3'
+gem 'rails-i18n', '~> 6.0.0.beta1'
 after_bundle do
   generate 'kaminari:config'
   generate 'kaminari:views', 'bootstrap4'

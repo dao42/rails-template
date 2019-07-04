@@ -1,12 +1,12 @@
 # rails-template
 
-**rails-template has supported the newest rails( 5.2 ) setup**
+**rails-template has supported the newest rails( 6.0.0-rc1 ) setup**
 
 A best & newest & fastest rails template for chinese senior rails developer.
 
 It's a best starting for your new rails project.
 
-An example built with rails-template: https://github.com/80percent/rails-template-example
+An example built with rails-template: https://github.com/dao42/rails-template-example
 
 ## How to use
 
@@ -20,15 +20,15 @@ Install dependencies:
 
 * rails 5
 
-    Update `ruby` up to 2.2 or higher, and install `rails 5.2`
+    Update `ruby` up to 2.5 or higher, and install `rails 6.0.0-rc1`
 
-    `$ ruby -v` ( output should be 2.2.x or 2.3.x or 2.4.x )
+    `$ ruby -v` ( output should be 2.5.x or 2.6.x )
 
     `$ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.com/` (optional)
 
     `$ gem install rails`
 
-    `$ rails -v` ( output should be rails 5.2.x )
+    `$ rails -v` ( output should be rails 6.0.0-rc1 )
 
 Then,
 
@@ -38,13 +38,13 @@ Then,
 
 2. Create your own rails app applying `rails-template`
 
-    `$ rails new myapp -m https://raw.github.com/80percent/rails-template/master/composer.rb`
+    `$ rails new myapp -m https://raw.github.com/dao42/rails-template/master/composer.rb`
 
 ## What we do
 
 `rails-template` apply lots of good components for you to make development damn quick.
 
-1. We use `Ruby on Rails 5`. `ActionCable` and `Turbolinks` features are opened by default.
+1. `ActionCable` and `Turbolinks` features are opened by default.
 
 2. `Bootstrap4` and `font-awesome` are integrated to make your products UI easily, it aslo has some example pages for you to quickly start.
 
@@ -54,13 +54,13 @@ Then,
 
 5. `slim`, `rspec`, `high_voltage` and so on.
 
-6. Zero-down restart mode with `mina-ng-puma`
+6. Zero-down phase-restart mode is opened with `mina-ng-puma`
 
 Other gems integrated in rails-template are worth learning seriously.
 
 ## Integrated mainly technology stack
 
-* Ruby on Rails 5.2
+* Ruby on Rails 6.0
 * bootstrap 4
 * font-awesome
 * figaro
@@ -77,19 +77,14 @@ Other gems integrated in rails-template are worth learning seriously.
 
 ## Deployment document
 
-* [How to deploy to ubuntu 14.04 with rails-template step by step(zh-CN)](https://github.com/80percent/rails-template/wiki/how-to-deploy-rails-to-ubuntu1404-with-rails-template)
+* [How to deploy to ubuntu 16.10 with rails-template step by step(zh-CN)](https://github.com/80percent/rails-template/wiki/how-to-deploy-rails-to-ubuntu1404-with-rails-template)
 
 ## Projects that using `rails-template`
 
 Welcome to pull request to update this if you choose `rails-template` for your new rails app.
 
-* [八十二十](https://80post.com)
-* [单麦 - 单品电商平台](https://80danmai.com)
 * [单麦小程序平台](https://www.danmai.com.cn)
-
-## Thanks
-
-[80percent team](https://www.80percent.io)
+* [至简天成科技](https://www.dao42.com)
 
 ## LICENSE
 
