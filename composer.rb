@@ -46,11 +46,13 @@ after_bundle do
   run "spring stop"
 end
 
+# FIXME: rails6 not use assets pipeline
 # jquery, bootstrap needed
 say 'Applying jquery...'
 gem 'jquery-rails'
 inject_into_file 'app/assets/javascripts/application.js', after: "//= require rails-ujs\n" do "//= require jquery3\n" end
 
+# FIXME: rails6 not use assets pipeline
 # bootstrap sass
 say 'Applying bootstrap4...'
 gem 'bootstrap', '~> 4.1.0'
@@ -132,8 +134,7 @@ gsub_file 'config/monit.conf.example', /myapp/, "#{app_name}"
 get_remote('config/backup.rb.example')
 gsub_file 'config/backup.rb.example', /myapp/, "#{app_name}"
 
-say 'Applying lograge & basic application config...'
-gem 'lograge'
+say 'Applying application config...'
 inject_into_file 'config/application.rb', after: "class Application < Rails::Application\n" do <<-EOF
     config.generators.assets = false
     config.generators.helper = false
@@ -141,8 +142,6 @@ inject_into_file 'config/application.rb', after: "class Application < Rails::App
     config.time_zone = 'Beijing'
     config.i18n.available_locales = [:en, :'zh-CN']
     config.i18n.default_locale = :'zh-CN'
-
-    config.lograge.enabled = true
 EOF
 end
 
