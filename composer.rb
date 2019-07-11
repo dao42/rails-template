@@ -9,7 +9,7 @@ def remove_comment_of_gem
 end
 
 def replace_myapp(file)
-  gsub_file file, /myapp/, app_name
+  gsub_file file, /myapp/, app_name, verbose: false
 end
 
 def get_remote(src, dest = nil)
@@ -20,7 +20,6 @@ def get_remote(src, dest = nil)
     repo = 'https://raw.github.com/dao42/rails-template/master/files/'
   end
   remote_file = repo + src
-  # remove_file dest
   get(remote_file, dest, force: true)
   replace_myapp(dest)
 end
