@@ -62,23 +62,11 @@ after_bundle do
   run "spring stop"
 end
 
-say 'Applying webpack peer...'
+say 'Applying jquery & font-awesome & bootstrap4...'
 after_bundle do
   yarn 'webpack@^4.0.0'
-end
-
-say 'Applying jquery...'
-after_bundle do
   yarn 'jquery@^3.3.1'
-end
-
-say 'Applying font-awesome...'
-after_bundle do
   yarn '@fortawesome/fontawesome-free@^5.9.0'
-end
-
-say 'Applying bootstrap4...'
-after_bundle do
   yarn 'popper.js@^1.14.7'
   yarn 'bootstrap@^4.3.1'
 end
