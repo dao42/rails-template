@@ -37,7 +37,6 @@ def yarn(lib)
 end
 
 def remove_dir(dir)
-  run("pwd")
   run("rm -rf #{dir}")
 end
 
