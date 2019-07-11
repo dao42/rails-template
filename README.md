@@ -117,6 +117,10 @@ Other gems integrated in rails-template are worth learning seriously.
 
 * [How to deploy to ubuntu 16.10 with rails-template step by step(zh-CN)](https://github.com/dao42/rails-template/wiki/how-to-deploy-rails-to-ubuntu1404-with-rails-template)
 
+## Roadmap
+
+* [ ] Add AdminLTE as admin dashboard
+
 ## Projects that using `dao42/rails-template`
 
 Welcome to pull request here to update this if you choose `dao42/rails-template` for your new rails app.
