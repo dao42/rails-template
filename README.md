@@ -46,10 +46,12 @@ Install dependencies:
 
 * yarn
 
-    Install `yarn` for webpacker( see install document: https://yarnpkg.com/en/docs/install)
+    Install `npm`, `yarn` for webpacker( see install document: https://yarnpkg.com/en/docs/install)
 
     ```bash
     $ yarn --version( output should be 1.6.x or higher )
+
+    $ npm config set registry https://registry.npm.taobao.org (optional, Chinese developer recommend)
     ```
 
 Then,
