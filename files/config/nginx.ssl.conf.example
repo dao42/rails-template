@@ -32,7 +32,7 @@ server {
   ssl_prefer_server_ciphers on;
   ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
 
-  location ^~ /assets/ {
+  location ^~ /packs/ {
     gzip_static on;
     expires max;
     add_header Cache-Control public;

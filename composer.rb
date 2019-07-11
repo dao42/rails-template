@@ -8,13 +8,37 @@ def remove_comment_of_gem
   gsub_file('Gemfile', /^\s*#.*$\n/, '')
 end
 
+def replace_myapp(file)
+  gsub_file file, /myapp/, app_name
+end
+
 def get_remote(src, dest = nil)
   dest ||= src
-  repo = 'https://raw.github.com/dao42/rails-template/master/files/'
-  #repo = File.join(File.dirname(__FILE__), 'files/')
+  if ENV['RAILS_TEMPLATE_DEBUG'].present?
+    repo = File.join(File.dirname(__FILE__), 'files/')
+  else
+    repo = 'https://raw.github.com/dao42/rails-template/master/files/'
+  end
   remote_file = repo + src
-  remove_file dest
-  get(remote_file, dest)
+  # remove_file dest
+  get(remote_file, dest, force: true)
+  replace_myapp(dest)
+end
+
+def get_remote_dir(names, dir)
+  names.each do |name|
+    src = File.join(dir, name)
+    get_remote(src)
+  end
+end
+
+def yarn(lib)
+  run("yarn add #{lib}")
+end
+
+def remove_dir(dir)
+  run("pwd")
+  run("rm -rf #{dir}")
 end
 
 remove_comment_of_gem
@@ -26,13 +50,7 @@ say 'Applying postgresql...'
 remove_gem('sqlite3')
 gem 'pg', '0.18'
 get_remote('config/database.yml.example')
-gsub_file "config/database.yml.example", /database: myapp_development/, "database: #{app_name}_development"
-gsub_file "config/database.yml.example", /database: myapp_test/, "database: #{app_name}_test"
-gsub_file "config/database.yml.example", /database: myapp_production/, "database: #{app_name}_production"
 get_remote('config/database.yml.example', 'config/database.yml')
-gsub_file "config/database.yml", /database: myapp_development/, "database: #{app_name}_development"
-gsub_file "config/database.yml", /database: myapp_test/, "database: #{app_name}_test"
-gsub_file "config/database.yml", /database: myapp_production/, "database: #{app_name}_production"
 
 # environment variables set
 say 'Applying figaro...'
@@ -46,19 +64,36 @@ after_bundle do
   run "spring stop"
 end
 
-# FIXME: rails6 not use assets pipeline
-# jquery, bootstrap needed
-say 'Applying jquery...'
-gem 'jquery-rails'
-inject_into_file 'app/assets/javascripts/application.js', after: "//= require rails-ujs\n" do "//= require jquery3\n" end
+say 'Applying webpack peer...'
+after_bundle do
+  yarn 'webpack@^4.0.0'
+end
 
-# FIXME: rails6 not use assets pipeline
-# bootstrap sass
+say 'Applying jquery...'
+after_bundle do
+  yarn 'jquery@^3.3.1'
+end
+
+say 'Applying font-awesome...'
+after_bundle do
+  yarn '@fortawesome/fontawesome-free@^5.9.0'
+end
+
 say 'Applying bootstrap4...'
-gem 'bootstrap', '~> 4.1.0'
-remove_file 'app/assets/stylesheets/application.css'
-get_remote('application.scss', 'app/assets/stylesheets/application.scss')
-inject_into_file 'app/assets/javascripts/application.js', after: "//= require jquery\n" do "//= require popper\n//= require bootstrap-sprockets\n" end
+after_bundle do
+  yarn 'popper.js@^1.14.7'
+  yarn 'bootstrap@^4.3.1'
+end
+
+remove_dir 'app/assets'
+jss = [ 'base.js' ]
+get_remote_dir(jss, 'app/javascript/js')
+images = [ 'favicon.ico' ]
+get_remote_dir(images, 'app/javascript/images')
+styles = [ 'application.scss', 'bootstrap_custom.scss', 'home.scss' ]
+get_remote_dir(styles, 'app/javascript/styles')
+packs = [ 'application.js' ]
+get_remote_dir(packs, 'app/javascript/packs')
 
 say 'Applying simple_form...'
 gem 'simple_form', '~> 4.0.0'
@@ -66,17 +101,16 @@ after_bundle do
   generate 'simple_form:install', '--bootstrap'
 end
 
-say 'Applying font-awesome & slim & high_voltage...'
-gem 'font-awesome-sass'
+say 'Applying slim...'
 gem 'slim-rails'
+say 'Applying high_voltage...'
 gem 'high_voltage', '~> 3.0.0'
-get_remote('home_controller.rb', 'app/controllers/home_controller.rb')
-get_remote('index.html.slim', 'app/views/home/index.html.slim')
-get_remote('about.html.slim', 'app/views/pages/about.html.slim')
+get_remote('app/controllers/home_controller.rb')
+get_remote('app/helpers/application_helper.rb')
+get_remote('app/views/home/index.html.slim')
+get_remote('app/views/pages/about.html.slim')
 remove_file('app/views/layouts/application.html.erb')
-get_remote('application.html.slim', 'app/views/layouts/application.html.slim')
-gsub_file 'app/views/layouts/application.html.slim', /myapp/, "#{app_name}"
-get_remote('favicon.ico', 'app/assets/images/favicon.ico')
+get_remote('app/views/layouts/application.html.slim')
 
 say 'Applying action cable config...'
 inject_into_file 'config/environments/production.rb', after: "# Mount Action Cable outside main process or domain\n" do <<-EOF
@@ -87,7 +121,7 @@ end
 # active_storage
 say 'Applying active_storage...'
 after_bundle do
-  rake 'active_storage:install'
+  rails_command 'active_storage:install'
 end
 
 say "Applying browser_warrior..."
@@ -101,6 +135,7 @@ gem 'sidekiq'
 get_remote('config/initializers/sidekiq.rb')
 get_remote('config/sidekiq.yml')
 get_remote('config/routes.rb')
+get_remote('config/secret.yml')
 
 say 'Applying kaminari & rails-i18n...'
 gem 'kaminari', '~> 1.1.1'
@@ -112,27 +147,19 @@ end
 
 say 'Applying mina & its plugins...'
 gem 'mina', '~> 1.2.2', require: false
-gem 'mina-ng-puma', '~> 1.2.0', require: false
-gem 'mina-multistage', '~> 1.0.3', require: false
-gem 'mina-sidekiq', '~> 1.0.3', require: false
-gem 'mina-logs', '~> 1.1.0', require: false
+gem 'mina-ng-puma', '>= 1.3.0', require: false
+gem 'mina-multistage', require: false
+gem 'mina-sidekiq', require: false
+gem 'mina-logs', require: false
 get_remote('config/deploy.rb')
 get_remote('config/puma.rb')
-gsub_file 'config/puma.rb', /\/data\/www\/myapp\/shared/, "/data/www/#{app_name}/shared"
 get_remote('config/deploy/production.rb')
-gsub_file 'config/deploy/production.rb', /\/data\/www\/myapp/, "/data/www/#{app_name}"
 get_remote('config/nginx.conf.example')
-gsub_file 'config/nginx.conf.example', /myapp/, "#{app_name}"
 get_remote('config/nginx.ssl.conf.example')
-gsub_file 'config/nginx.ssl.conf.example', /myapp/, "#{app_name}"
 get_remote('config/logrotate.conf.example')
-gsub_file 'config/logrotate.conf.example', /myapp/, "#{app_name}"
 
 get_remote('config/monit.conf.example')
-gsub_file 'config/monit.conf.example', /myapp/, "#{app_name}"
-
 get_remote('config/backup.rb.example')
-gsub_file 'config/backup.rb.example', /myapp/, "#{app_name}"
 
 say 'Applying application config...'
 inject_into_file 'config/application.rb', after: "class Application < Rails::Application\n" do <<-EOF
@@ -164,16 +191,17 @@ after_bundle do
 end
 
 get_remote 'README.md'
-gsub_file 'README.md', /myapp/, "#{app_name}"
 # `ack` is a really quick tool for searching code
 get_remote 'ackrc', '.ackrc'
 
 after_bundle do
-  say 'Done! init `git` and `database`...'
-  rake 'db:create'
-  rake 'db:migrate'
+  say 'Almost done! init `git` and `database`...'
+  rails_command 'db:create'
+  rails_command 'db:migrate'
+  rails_command 'db:seed'
+  run 'bin/webpack'
   git :init
   git add: '.'
-  git commit: '-m "init rails"'
-  say "Build successfully! `cd #{app_name}` and use `rails s` to start your rails app..."
+  git commit: '-m "init rails with dao42/rails-template"'
+  say "Build successfully! `cd #{app_name}` and input `rails s` to start your rails app..."
 end

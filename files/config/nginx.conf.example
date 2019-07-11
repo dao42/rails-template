@@ -7,7 +7,7 @@ server {
   server_name example.com;
   root /data/www/myapp/current/public;
 
-  location ^~ /assets/ {
+  location ^~ /packs/ {
     gzip_static on;
     expires max;
     add_header Cache-Control public;
