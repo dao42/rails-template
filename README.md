@@ -109,7 +109,7 @@ Other gems integrated in rails-template are worth learning seriously.
 
 ## Starting with webpacker document
 
-* [Starting with webpacker for Rails 6(zh-CN)]()
+* [Starting with webpacker for Rails 6(zh-CN)](https://ruby-china.org/topics/38832)
 
 ## Deployment document
 
