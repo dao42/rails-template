@@ -1,0 +1,25 @@
+- content_for :title, 'Log in'
+
+main
+  section.content-messages
+    = render 'shared/admin/flash_messages'
+  section.content
+    .login-box
+      .login-logo
+        span
+          | Dashboard
+      .card
+        .card-body.login-card-body
+          p.login-box-msg Log in
+          = form_tag admin_login_path do
+            .input-group.mb-3
+              = text_field_tag :name, nil, placeholder: 'Username', class: 'form-control'
+              .input-group-append.input-group-text
+                span.fas.fa-envelope
+            .input-group.mb-3
+              = password_field_tag :password, nil, placeholder: 'Password', class: 'form-control'
+              .input-group-append.input-group-text
+                span.fas.fa-lock
+            .row
+              .col-4
+                = submit_tag 'Log in', class: 'btn btn-primary btn-block btn-flat'

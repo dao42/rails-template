@@ -108,6 +108,7 @@ Other gems integrated in rails-template are worth learning seriously.
 * mina
 * puma
 * rspec
+* adminlte 3
 
 ## Starting with webpacker document
 

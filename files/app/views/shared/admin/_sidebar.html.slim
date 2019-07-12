@@ -1,0 +1,41 @@
+/! Main Sidebar Container
+aside.main-sidebar.sidebar-dark-primary.elevation-4
+  /! Brand Logo
+  a.brand-link href="/admin"
+    = image_pack_tag 'logo.png', class: 'brand-image img-circle elevation-3'
+    span.brand-text.font-weight-light 控制台
+  /! Sidebar
+  .sidebar
+    /! Sidebar user panel (optional)
+    .user-panel.mt-3.pb-3.mb-3.d-flex
+      .image
+        = image_pack_tag 'admin-user.jpg', class: 'img-circle elevation-2'
+      .info
+        a.d-block href="#"  Alexander Pierce
+    /! Sidebar Menu
+    nav.mt-2
+      ul.nav.nav-pills.nav-sidebar.flex-column data-accordion="false" data-widget="treeview" role="menu"
+        /!
+          | Add icons to the links using the .nav-icon class
+          | with font-awesome or any other icon font library
+        li.nav-item.has-treeview.menu-open
+          a.nav-link.active href="#"
+            i.nav-icon.fas.fa-tachometer-alt
+            p
+              | Starter Pages
+              i.right.fas.fa-angle-left
+          ul.nav.nav-treeview
+            li.nav-item
+              a.nav-link.active href="#"
+                i.far.fa-circle.nav-icon
+                p Active Page
+            li.nav-item
+              a.nav-link href="#"
+                i.far.fa-circle.nav-icon
+                p Inactive Page
+        li.nav-item
+          a.nav-link href="#"
+            i.nav-icon.fas.fa-th
+            p
+              | Simple Link
+              span.right.badge.badge-danger New

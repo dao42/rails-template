@@ -1,0 +1,18 @@
+- content_for :title do
+  | 账号设置
+- content_for :page_title do
+  | 帐号设置
+
+.box.box-primary
+  .box-header.with-border
+    h3.box-title
+      | 编辑账号
+  = simple_form_for current_admin, url: admin_account_path do |f|
+    .box-body
+      = f.input :name, label: '用户名'
+      = f.input :current_password, label: '当前密码', required: true
+    .box-body
+      = f.input :password, label: '新密码（如果不修改请留空）'
+      = f.input :password_confirmation, label: '确认新密码'
+    .box-footer
+      = f.submit '更新帐号', class: 'btn btn-primary'

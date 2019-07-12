@@ -46,6 +46,12 @@ $ ./bin/webpack-dev-server
 $ rails s
 ```
 
+## Admin dashboard
+
+Access url: /admin
+Default superuser: admin
+Default password: admin
+
 ## Tech stack
 
 * Ruby on Rails 6.0
@@ -62,6 +68,7 @@ $ rails s
 * mina
 * puma
 * rspec
+* adminlte 3
 
 ## Built with
 

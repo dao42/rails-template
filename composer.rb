@@ -66,6 +66,18 @@ say 'Applying jquery & font-awesome & bootstrap4...'
 after_bundle do
   yarn 'webpack@^4.0.0'
   yarn 'jquery@^3.3.1'
+  inject_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')\n" do <<-EOF
+
+const webpack = require('webpack')
+environment.plugins.append('Provide', new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+  'window.jQuery': 'jquery',
+  Popper: ['popper.js', 'default']
+}))
+
+EOF
+  end
   yarn '@fortawesome/fontawesome-free@^5.9.0'
   yarn 'popper.js@^1.14.7'
   yarn 'bootstrap@^4.3.1'
@@ -80,6 +92,7 @@ styles = [ 'application.scss', 'bootstrap_custom.scss', 'home.scss' ]
 get_remote_dir(styles, 'app/javascript/styles')
 packs = [ 'application.js' ]
 get_remote_dir(packs, 'app/javascript/packs')
+
 
 say 'Applying simple_form...'
 gem 'simple_form', '~> 4.0.0'
@@ -122,6 +135,71 @@ get_remote('config/initializers/sidekiq.rb')
 get_remote('config/sidekiq.yml')
 get_remote('config/routes.rb')
 get_remote('config/secret.yml')
+
+say 'Applying adminlte 3...'
+after_bundle do
+  yarn 'admin-lte@^3.0.0-beta.1'
+  yarn 'daterangepicker@^3.0.5'
+  yarn 'moment-timezone'
+end
+
+styles = [ 'admin.scss' ]
+get_remote_dir(styles, 'app/javascript/styles')
+images = [ 'admin-user.jpg', 'logo.png' ]
+get_remote_dir(images, 'app/javascript/images')
+packs = [ 'admin.js' ]
+get_remote_dir(packs, 'app/javascript/packs')
+
+controllers = [ 'accounts_controller.rb', 'base_controller.rb', 'dashboard_controller.rb', 'sessions_controller.rb' ]
+get_remote_dir(controllers, 'app/controllers/admin')
+accounts_views = [ 'edit.html.slim' ]
+get_remote_dir(accounts_views, 'app/views/admin/accounts')
+dashboard_views = [ 'index.html.slim' ]
+get_remote_dir(dashboard_views, 'app/views/admin/dashboard')
+sessions_views = [ 'new.html.slim' ]
+get_remote_dir(sessions_views, 'app/views/admin/sessions')
+shared_admin_layouts = [ '_flash_messages.html.slim', '_header.html.slim', '_sidebar.html.slim' ]
+get_remote_dir(shared_admin_layouts, 'app/views/shared/admin')
+admin_layouts = [ 'admin.html.slim' ]
+get_remote_dir(admin_layouts, 'app/views/layouts')
+inject_into_file 'config/routes.rb', after: "Rails.application.routes.draw do\n" do <<-EOF
+
+  namespace :admin do
+    get 'login', to: 'sessions#new', as: :login
+    post 'login', to: 'sessions#create'
+    delete 'logout', to: 'sessions#destroy', as: :logout
+    resource :account, only: [:edit, :update]
+
+    root to: 'dashboard#index'
+  end
+EOF
+end
+# secure access for sidekiq
+inject_into_file 'config/routes.rb', after: "Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]\n" do <<-EOF
+
+class AdminConstraint
+  def matches?(request)
+    return false unless request.session[:current_admin_id].present?
+    admin = Administrator.find_by(id: request.session[:current_admin_id])
+    admin.present?
+  end
+end
+
+EOF
+end
+inject_into_file 'config/routes.rb', after: "mount Sidekiq::Web => '/sidekiq'" do
+  ', constraints: AdminConstraint.new'
+end
+# add db seeds
+get_remote('db/seeds.rb')
+gem 'bcrypt'
+after_bundle do
+  generate(:model, 'administrator', 'name:string:uniq:index', 'password:digest')
+  inject_into_file 'app/models/administrator.rb', after: "class Administrator < ApplicationRecord\n" do <<-EOF
+    validates :name, presence: true, uniqueness: true
+EOF
+  end
+end
 
 say 'Applying kaminari & rails-i18n...'
 gem 'kaminari', '~> 1.1.1'
@@ -181,7 +259,7 @@ get_remote 'README.md'
 get_remote 'ackrc', '.ackrc'
 
 after_bundle do
-  say 'Almost done! init `git` and `database`...'
+  say 'Almost done! Now init `git` and `database`...'
   rails_command 'db:create'
   rails_command 'db:migrate'
   rails_command 'db:seed'
