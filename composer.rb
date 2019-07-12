@@ -75,7 +75,6 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
   'window.jQuery': 'jquery',
   Popper: ['popper.js', 'default']
 }))
-
 EOF
   end
   yarn '@fortawesome/fontawesome-free@^5.9.0'
@@ -112,7 +111,7 @@ remove_file('app/views/layouts/application.html.erb')
 get_remote('app/views/layouts/application.html.slim')
 
 say 'Applying action cable config...'
-inject_into_file 'config/environments/production.rb', after: "# Mount Action Cable outside main process or domain\n" do <<-EOF
+inject_into_file 'config/environments/production.rb', after: "# Mount Action Cable outside main process or domain.\n" do <<-EOF
   config.action_cable.allowed_request_origins = [ "\#{ENV['PROTOCOL']}://\#{ENV['DOMAIN']}" ]
 EOF
 end
@@ -184,7 +183,6 @@ class AdminConstraint
     admin.present?
   end
 end
-
 EOF
 end
 inject_into_file 'config/routes.rb', after: "mount Sidekiq::Web => '/sidekiq'" do
@@ -196,7 +194,7 @@ gem 'bcrypt'
 after_bundle do
   generate(:model, 'administrator', 'name:string:uniq:index', 'password:digest')
   inject_into_file 'app/models/administrator.rb', after: "class Administrator < ApplicationRecord\n" do <<-EOF
-    validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 EOF
   end
 end
