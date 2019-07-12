@@ -84,11 +84,13 @@ Then,
 
 5. `slim`, `simple_form`, `kaminari`, `high_voltage` are installed.
 
-6. `rspec`, `factory_bot_rails`, `database_cleaner` are ready for your testing automation.
+6. `adminlte 3` is ready for your administrator dashboard.
 
-6. Zero-down phase-restart mode is out-of-box with `mina-ng-puma`.
+7. `rspec`, `factory_bot_rails`, `database_cleaner` are ready for your testing automation.
 
-7. `monit`, `nginx example`, `https ssl example`, `logrotate`, `backup example` is ready for you.
+8. Zero-down phase-restart mode is out-of-box with `mina-ng-puma`.
+
+9. `monit`, `nginx example`, `https ssl example`, `logrotate`, `backup example` is ready for you.
 
 Other gems integrated in rails-template are worth learning seriously.
 
@@ -120,7 +122,7 @@ Other gems integrated in rails-template are worth learning seriously.
 
 ## Roadmap
 
-* [ ] Add AdminLTE as admin dashboard
+* [x] Add AdminLTE as admin dashboard
 
 ## Projects that using `dao42/rails-template`
 
