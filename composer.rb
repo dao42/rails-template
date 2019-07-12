@@ -260,6 +260,7 @@ get_remote 'ackrc', '.ackrc'
 
 after_bundle do
   say 'Almost done! Now init `git` and `database`...'
+  rails_command 'db:drop'
   rails_command 'db:create'
   rails_command 'db:migrate'
   rails_command 'db:seed'
