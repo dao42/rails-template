@@ -49,7 +49,9 @@ $ rails s
 ## Admin dashboard
 
 Access url: /admin
+
 Default superuser: admin
+
 Default password: admin
 
 ## Tech stack
