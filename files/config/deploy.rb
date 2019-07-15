@@ -10,6 +10,7 @@ require "mina_sidekiq/tasks"
 require 'mina/logs'
 require 'mina/multistage'
 
+set :asset_dirs, fetch(:asset_dirs, []).push('app/javascript')
 set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/uploads', 'node_modules', 'storage')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/application.yml')
 
