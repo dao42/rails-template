@@ -11,7 +11,7 @@ require 'mina/logs'
 require 'mina/multistage'
 
 set :asset_dirs, fetch(:asset_dirs, []).push('app/javascript')
-set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/uploads', 'node_modules', 'storage')
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'public/uploads', 'public/packs', 'node_modules', 'storage')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/application.yml')
 
 set :puma_config, ->{ "#{fetch(:current_path)}/config/puma.rb" }
@@ -33,6 +33,9 @@ task :setup do
 
   command %[mkdir -p "#{fetch(:shared_path)}/public/uploads"]
   command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/public/uploads"]
+
+  command %[mkdir -p "#{fetch(:shared_path)}/public/packs"]
+  command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/public/packs"]
 
   command %[mkdir -p "#{fetch(:shared_path)}/node_modules"]
   command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/node_modules"]
