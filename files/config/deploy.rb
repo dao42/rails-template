@@ -1,3 +1,4 @@
+STDOUT.sync = true
 set :stages, %w(production)
 set :default_stage, 'production'
 
