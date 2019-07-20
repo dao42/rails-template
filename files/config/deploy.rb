@@ -54,6 +54,12 @@ task :setup do
   command %[echo "-----> Be sure to edit '#{fetch(:shared_path)}/config/database.yml'"]
 end
 
+desc "Clear bootsnap cache"
+task :clear_bootsnap do
+  command %[echo "Clear bootsnap cache..."]
+  command %[rm -rf "#{fetch(:shared_path)}/tmp/bootsnap-*"]
+end
+
 desc "Deploys the current version to the server."
 task :deploy do
   command %[echo "-----> Server: #{fetch(:domain)}"]
@@ -61,17 +67,18 @@ task :deploy do
   command %[echo "-----> Branch: #{fetch(:branch)}"]
 
   deploy do
-    invoke :'sidekiq:quiet'
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
+    invoke :clear_bootsnap
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     on :launch do
       invoke :'rbenv:load'
-      invoke :'puma:phased_restart'
+      invoke :'sidekiq:quiet'
+      invoke :'puma:smart_restart'
       invoke :'sidekiq:restart'
     end
   end

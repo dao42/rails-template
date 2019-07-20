@@ -209,7 +209,7 @@ end
 
 say 'Applying mina & its plugins...'
 gem 'mina', '~> 1.2.2', require: false
-gem 'mina-ng-puma', '>= 1.3.0', require: false
+gem 'mina-ng-puma', '>= 1.4.0', require: false
 gem 'mina-multistage', require: false
 gem 'mina-sidekiq', require: false
 gem 'mina-logs', require: false
