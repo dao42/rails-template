@@ -66,6 +66,7 @@ say 'Applying jquery & font-awesome & bootstrap4...'
 after_bundle do
   yarn 'webpack@^4.0.0'
   yarn 'jquery@^3.3.1'
+  yarn 'expose-loader'
   inject_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')\n" do <<-EOF
 
 const webpack = require('webpack')
@@ -75,6 +76,17 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
   'window.jQuery': 'jquery',
   Popper: ['popper.js', 'default']
 }))
+
+environment.loaders.append('expose', {
+    test: require.resolve('jquery'),
+    use: [{
+        loader: 'expose-loader',
+        options: '$'
+    }, {
+        loader: 'expose-loader',
+        options: 'jQuery',
+    }]
+})
 EOF
   end
   yarn '@fortawesome/fontawesome-free@^5.9.0'
@@ -140,6 +152,7 @@ after_bundle do
   yarn 'admin-lte@^3.0.0-beta.1'
   yarn 'daterangepicker@^3.0.5'
   yarn 'moment-timezone'
+  yarn 'tempusdominus-core'
 end
 
 styles = [ 'admin.scss' ]
