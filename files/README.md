@@ -37,16 +37,13 @@ Install dependencies:
 Then,
 
 ```bash
-$ bundle install
-$ yarn install
-$ rails db:setup
-$ rails db:seed
+$ ./bin/setup
 $ ./bin/webpack-dev-server
 # open new terminal tab
 $ rails s
 ```
 
-## Admin dashboard
+## Admin dashboard info
 
 Access url: /admin
 

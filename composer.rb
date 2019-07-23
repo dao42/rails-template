@@ -268,13 +268,12 @@ end
 get_remote 'README.md'
 # `ack` is a really quick tool for searching code
 get_remote 'ackrc', '.ackrc'
+get_remote 'bin/setup'
 
 after_bundle do
   say 'Almost done! Now init `git` and `database`...'
   rails_command 'db:drop'
-  rails_command 'db:create'
-  rails_command 'db:migrate'
-  rails_command 'db:seed'
+  rails_command 'db:prepare'
   run 'bin/webpack'
   git :init
   git add: '.'
