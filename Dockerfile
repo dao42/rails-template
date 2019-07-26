@@ -14,13 +14,9 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.orig \
 && echo "deb http://mirrors.aliyun.com/debian-security/ stretch/updates main non-free contrib" >> /etc/apt/sources.list \
 && echo "deb-src http://mirrors.aliyun.com/debian-security/ stretch/updates main non-free contrib" >> /etc/apt/sources.list
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
-
 RUN apt-get update \
-    && apt-get install -y apt-utils nodejs git-core curl zlib1g-dev build-essential libssl-dev \
-    wget ca-certificates \
+    && apt-get install -y apt-utils git-core curl zlib1g-dev build-essential libssl-dev \
+    ca-certificates \
     postgresql postgresql-contrib \
     libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev \
     software-properties-common libffi-dev mysql-client default-libmysqlclient-dev tmux apt-transport-https --no-install-recommends \
@@ -29,6 +25,10 @@ RUN apt-get update \
     && dpkg-reconfigure --frontend=noninteractive locales \
     && update-locale LANG=en_US.UTF-8 \
     && rm -rf /var/lib/apt/lists/*
+
+#different strange error may raise because of networking problem, change to different network may solve them.
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get update && apt-get install -y nodejs
 
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
@@ -47,6 +47,12 @@ RUN npm config rm proxy && npm config rm https-proxy
 RUN yarn config set sass-binary-site http://npm.taobao.org/mirrors/node-sass
 
 RUN yarn install --no-bin-links
+
+RUN mkdir /app
+
+WORKDIR /app
+
+EXPOSE 3000
 
 LABEL maintainer="Sherllo Chen <sherllochen@gmail.com>"
 
