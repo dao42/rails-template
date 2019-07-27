@@ -101,6 +101,7 @@ task :first_deploy do
       invoke :'rbenv:load'
       invoke :'rails:db_create'
       invoke :'rails:db_migrate'
+      invoke :'rails', 'db:seed'
     end
   end
 end
