@@ -17,7 +17,7 @@ def get_remote(src, dest = nil)
   if ENV['RAILS_TEMPLATE_DEBUG'].present?
     repo = File.join(File.dirname(__FILE__), 'files/')
   else
-    repo = 'https://raw.github.com/dao42/rails-template/master/files/'
+    repo = 'https://raw.github.com/sherllochen/rails-template/master/files/'
   end
   remote_file = repo + src
   get(remote_file, dest, force: true)
@@ -90,7 +90,6 @@ environment.loaders.append('expose', {
 EOF
   end
   yarn '@fortawesome/fontawesome-free@^5.9.0'
-  yarn 'popper.js@^1.14.7'
   yarn 'bootstrap@^4.3.1'
 end
 
@@ -150,9 +149,7 @@ get_remote('config/secret.yml')
 say 'Applying adminlte 3...'
 after_bundle do
   yarn 'admin-lte@^3.0.0-beta.1'
-  yarn 'daterangepicker@^3.0.5'
   yarn 'moment-timezone'
-  yarn 'tempusdominus-core'
 end
 
 styles = [ 'admin.scss' ]
@@ -278,6 +275,6 @@ after_bundle do
   run 'bin/webpack'
   git :init
   git add: '.'
-  git commit: '-m "init rails with dao42/rails-template"'
+  git commit: '-m "init rails with sherllochen/rails-template"'
   say "Build successfully! `cd #{app_name}` and input `rails s` to start your rails app..."
 end
