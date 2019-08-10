@@ -2,14 +2,18 @@
 import 'jquery'
 import 'bootstrap/dist/js/bootstrap'
 
-import('@rails/ujs').then( ujs => ujs.start() )
-import('turbolinks').then( turbolinks => turbolinks.start() )
-import('@rails/activestorage').then( activestorage => activestorage.start() )
+import RailsUjs from '@rails/ujs'
+import Turbolinks from 'turbolinks'
+import * as ActiveStorage from '@rails/activestorage'
 import 'channels'
 
 const images = require.context('images', true)
 const imagePath = (name) => images(name, true)
 
-$(function () {
+RailsUjs.start()
+Turbolinks.start()
+ActiveStorage.start()
+
+$(document).on('turbolinks:load', function(){
   $('[data-toggle="tooltip"]').tooltip()
 })
