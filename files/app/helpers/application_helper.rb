@@ -13,6 +13,18 @@ module ApplicationHelper
     body_class_page
   end
 
+  # Admin active for helper
+  def admin_active_for(controller_name, navbar_name)
+    if controller_name.to_s == admin_root_path
+      return controller_name.to_s == navbar_name.to_s ? "active" : ""
+    end
+    navbar_name.to_s.include?(controller_name.to_s) ? 'active' : ''
+  end
+
+  def current_path
+    request.env['PATH_INFO']
+  end
+
   def flash_class(level)
     case level
     when 'notice', 'success' then 'alert alert-success alert-dismissible'

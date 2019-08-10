@@ -2,107 +2,20 @@ nav.main-header.navbar.navbar-expand.navbar-white.navbar-light.border-bottom
   /! Left navbar links
   ul.navbar-nav
     li.nav-item
-      a.nav-link data-widget="pushmenu" href="#"
+      a.nav-link data-widget="pushmenu" href="javascript:void(0)"
         i.fas.fa-bars
-    li.nav-item.d-none.d-sm-inline-block
-      a.nav-link href="#"  Home
-    li.nav-item.d-none.d-sm-inline-block
-      a.nav-link href="#"  Contact
   /! SEARCH FORM
-  form.form-inline.ml-3
-    .input-group.input-group-sm
-      input.form-control.form-control-navbar aria-label="Search" placeholder="Search" type="search" /
-      .input-group-append
-        button.btn.btn-navbar type="submit"
-          i.fas.fa-search
+  - if content_for?(:search)
+    = yield(:search)
   /! Right navbar links
   ul.navbar-nav.ml-auto
     /! Messages Dropdown Menu
-    li.nav-item.dropdown
-      a.nav-link data-toggle="dropdown" href="#"
-        i.far.fa-comments
-        span.badge.badge-danger.navbar-badge 3
-      .dropdown-menu.dropdown-menu-lg.dropdown-menu-right
-        a.dropdown-item href="#"
-          /! Message Start
-          .media
-            = image_pack_tag 'admin-user.jpg', class: 'img-size-50 mr-3 img-circle'
-            .media-body
-              h3.dropdown-item-title
-                | Brad Diesel
-                span.float-right.text-sm.text-danger
-                  i.fas.fa-star
-              p.text-sm Call me whenever you can...
-              p.text-sm.text-muted
-                i.far.fa-clock.mr-1
-                | 4 Hours Ago
-          /! Message End
-        .dropdown-divider
-        a.dropdown-item href="#"
-          /! Message Start
-          .media
-            = image_pack_tag 'admin-user.jpg', class: 'img-size-50 mr-3 img-circle'
-            .media-body
-              h3.dropdown-item-title
-                | John Pierce
-                span.float-right.text-sm.text-muted
-                  i.fas.fa-star
-              p.text-sm I got your message bro
-              p.text-sm.text-muted
-                i.far.fa-clock.mr-1
-                | 4 Hours Ago
-          /! Message End
-        .dropdown-divider
-        a.dropdown-item href="#"
-          /! Message Start
-          .media
-            = image_pack_tag 'admin-user.jpg', class: 'img-size-50 mr-3 img-circle'
-            .media-body
-              h3.dropdown-item-title
-                | Nora Silvester
-                span.float-right.text-sm.text-warning
-                  i.fas.fa-star
-              p.text-sm The subject goes here
-              p.text-sm.text-muted
-                i.far.fa-clock.mr-1
-                | 4 Hours Ago
-          /! Message End
-        .dropdown-divider
-        a.dropdown-item.dropdown-footer href="#"  See All Messages
-    /! Notifications Dropdown Menu
-    li.nav-item.dropdown
-      a.nav-link data-toggle="dropdown" href="#"
-        i.far.fa-bell
-        span.badge.badge-warning.navbar-badge 15
-      .dropdown-menu.dropdown-menu-lg.dropdown-menu-right
-        span.dropdown-header 15 Notifications
-        .dropdown-divider
-        a.dropdown-item href="#"
-          i.fas.fa-envelope.mr-2
-          | 4 new messages
-          span.float-right.text-muted.text-sm 3 mins
-        .dropdown-divider
-        a.dropdown-item href="#"
-          i.fas.fa-users.mr-2
-          | 8 friend requests
-          span.float-right.text-muted.text-sm 12 hours
-        .dropdown-divider
-        a.dropdown-item href="#"
-          i.fas.fa-file.mr-2
-          | 3 new reports
-          span.float-right.text-muted.text-sm 2 days
-        .dropdown-divider
-        a.dropdown-item.dropdown-footer href="#"  See All Notifications
-    li.nav-item
-      a.nav-link data-slide="true" data-widget="control-sidebar" href="#"
-        i.fas.fa-th-large
-      a.sidebar-toggle[href="#" data-toggle="offcanvas"]
     li.nav-item.dropdown.show
-      a.nav-link.dropdown-toggle href="#" data-toggle="dropdown"
+      a.nav-link.dropdown-toggle href="javascript:void(0)" data-toggle="dropdown"
         span
           = current_admin.name
       ul.dropdown-menu.dropdown-menu-right
         li.user-header
-          = link_to '帐号设置', edit_admin_account_path, class: 'dropdown-item'
+          = link_to 'Account Setting', edit_admin_account_path, class: 'dropdown-item'
           .dropdown-divider
-          = link_to '退出', admin_logout_path, method: :delete, class: 'dropdown-item'
+          = link_to 'Logout', admin_logout_path, method: :delete, class: 'dropdown-item'

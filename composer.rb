@@ -266,17 +266,17 @@ after_bundle do
 end
 
 get_remote 'README.md'
-# `ack` is a really quick tool for searching code
 get_remote 'ackrc', '.ackrc'
 get_remote 'bin/setup'
 
 after_bundle do
   say 'Almost done! Now init `git` and `database`...'
   rails_command 'db:drop'
-  rails_command 'db:prepare'
-  run 'bin/webpack'
+  rails_command 'db:create'
+  rails_command 'db:migrate'
+  rails_command 'db:seed'
   git :init
   git add: '.'
   git commit: '-m "init rails with dao42/rails-template"'
-  say "Build successfully! `cd #{app_name}` and input `rails s` to start your rails app..."
+  say "Build successfully! Start `./bin/webpack-dev-server` first, then `cd #{app_name}` and input `rails s` to start your rails app..."
 end
