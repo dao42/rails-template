@@ -1,6 +1,6 @@
 def remove_gem(*names)
   names.each do |name|
-    gsub_file 'Gemfile', /gem '#{name}'\n/, ''
+    gsub_file 'Gemfile', /gem '#{name}'.*\n/, ''
   end
 end
 
@@ -46,7 +46,7 @@ get_remote('gitignore', '.gitignore')
 # postgresql
 say 'Applying postgresql...'
 remove_gem('sqlite3')
-gem 'pg', '0.18'
+gem 'pg', '>= 1.1'
 get_remote('config/database.yml.example')
 get_remote('config/database.yml.example', 'config/database.yml')
 
@@ -106,7 +106,7 @@ get_remote_dir(packs, 'app/javascript/packs')
 
 
 say 'Applying simple_form...'
-gem 'simple_form', '~> 4.0.0'
+gem 'simple_form', '~> 4.1'
 after_bundle do
   generate 'simple_form:install', '--bootstrap'
 end
@@ -114,7 +114,7 @@ end
 say 'Applying slim...'
 gem 'slim-rails'
 say 'Applying high_voltage...'
-gem 'high_voltage', '~> 3.0.0'
+gem 'high_voltage', '~> 3.1'
 get_remote('app/controllers/home_controller.rb')
 get_remote('app/helpers/application_helper.rb')
 get_remote('app/views/home/index.html.slim')

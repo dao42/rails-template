@@ -1,6 +1,6 @@
 # dao42/rails-template
 
-**dao42/rails-template has supported the newest rails( 6.0.0-rc1 ) project setup**
+**dao42/rails-template has supported the newest rails 6.0.0 project setup**
 
 Maybe the best & newest & fastest rails template for senior rails developer.
 
@@ -32,7 +32,7 @@ Install dependencies:
 
 * rails 6
 
-    Using `rbenv`, update `ruby` up to 2.5 or higher, and install `rails 6.0.0-rc1`
+    Using `rbenv`, update `ruby` up to 2.5 or higher, and install `rails 6.0.0`
 
     ```bash
     $ ruby -v ( output should be 2.5.x or 2.6.x )
@@ -41,7 +41,7 @@ Install dependencies:
 
     $ gem install rails
 
-    $ rails -v ( output should be rails 6.0.0-rc1 )
+    $ rails -v ( output should be rails 6.0.0 )
     ```
 
 * yarn
