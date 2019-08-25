@@ -7,3 +7,6 @@ PROTOCOL: http
 
 # sidekiq db
 SIDEKIQ_DB: '1'
+
+# google anlytics
+GA: ''

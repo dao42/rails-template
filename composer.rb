@@ -70,8 +70,20 @@ after_bundle do
   yarn 'rails-erb-loader'
   inject_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')\n" do <<-EOF
 
-const erb =  require('./loaders/erb')
 const webpack = require('webpack')
+
+environment.loaders.prepend('erb', {
+  test: /\.erb$/,
+  enforce: 'pre',
+  exclude: /node_modules/,
+  use: [{
+    loader: 'rails-erb-loader',
+    options: {
+      runner: (/^win/.test(process.platform) ? 'ruby ' : '') + 'bin/rails runner'
+    }
+  }]
+})
+
 environment.plugins.append('Provide', new webpack.ProvidePlugin({
   $: 'jquery',
   jQuery: 'jquery',
@@ -90,7 +102,6 @@ environment.loaders.append('expose', {
     }]
 })
 
-environment.loaders.prepend('erb', erb)
 EOF
   end
   yarn '@fortawesome/fontawesome-free@^5.9.0'
@@ -105,7 +116,7 @@ images = [ 'favicon.ico' ]
 get_remote_dir(images, 'app/javascript/images')
 styles = [ 'application.scss', 'bootstrap_custom.scss', 'home.scss' ]
 get_remote_dir(styles, 'app/javascript/styles')
-packs = [ 'application.js' ]
+packs = [ 'application.js', 'ga.js.erb' ]
 get_remote_dir(packs, 'app/javascript/packs')
 
 
