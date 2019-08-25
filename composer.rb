@@ -67,8 +67,10 @@ after_bundle do
   yarn 'webpack@^4.0.0'
   yarn 'jquery@^3.3.1'
   yarn 'expose-loader'
+  yarn 'rails-erb-loader'
   inject_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')\n" do <<-EOF
 
+const erb =  require('./loaders/erb')
 const webpack = require('webpack')
 environment.plugins.append('Provide', new webpack.ProvidePlugin({
   $: 'jquery',
@@ -87,6 +89,8 @@ environment.loaders.append('expose', {
         options: 'jQuery',
     }]
 })
+
+environment.loaders.prepend('erb', erb)
 EOF
   end
   yarn '@fortawesome/fontawesome-free@^5.9.0'
@@ -161,6 +165,8 @@ images = [ 'admin-user.jpg', 'logo.png' ]
 get_remote_dir(images, 'app/javascript/images')
 packs = [ 'admin.js' ]
 get_remote_dir(packs, 'app/javascript/packs')
+admin_jss = [ 'sidebar.js' ]
+get_remote_dir(admin_jss, 'app/javascript/js/admin')
 
 controllers = [ 'accounts_controller.rb', 'base_controller.rb', 'dashboard_controller.rb', 'sessions_controller.rb' ]
 get_remote_dir(controllers, 'app/controllers/admin')
