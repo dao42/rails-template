@@ -67,42 +67,29 @@ after_bundle do
   yarn 'webpack@^4.0.0'
   yarn 'jquery@^3.3.1'
   yarn 'expose-loader'
-  yarn 'rails-erb-loader'
-  inject_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')\n" do <<-EOF
+  inject_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')\n" do <<~EOF
 
-const webpack = require('webpack')
+    const webpack = require('webpack')
 
-environment.loaders.prepend('erb', {
-  test: /\.erb$/,
-  enforce: 'pre',
-  exclude: /node_modules/,
-  use: [{
-    loader: 'rails-erb-loader',
-    options: {
-      runner: (/^win/.test(process.platform) ? 'ruby ' : '') + 'bin/rails runner'
-    }
-  }]
-})
+    environment.plugins.append('Provide', new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Popper: ['popper.js', 'default']
+    }))
 
-environment.plugins.append('Provide', new webpack.ProvidePlugin({
-  $: 'jquery',
-  jQuery: 'jquery',
-  'window.jQuery': 'jquery',
-  Popper: ['popper.js', 'default']
-}))
+    environment.loaders.append('expose', {
+        test: require.resolve('jquery'),
+        use: [{
+            loader: 'expose-loader',
+            options: '$'
+        }, {
+            loader: 'expose-loader',
+            options: 'jQuery',
+        }]
+    })
 
-environment.loaders.append('expose', {
-    test: require.resolve('jquery'),
-    use: [{
-        loader: 'expose-loader',
-        options: '$'
-    }, {
-        loader: 'expose-loader',
-        options: 'jQuery',
-    }]
-})
-
-EOF
+    EOF
   end
   yarn '@fortawesome/fontawesome-free@^5.9.0'
   yarn 'popper.js@^1.14.7'
@@ -116,9 +103,16 @@ images = [ 'favicon.ico' ]
 get_remote_dir(images, 'app/javascript/images')
 styles = [ 'application.scss', 'bootstrap_custom.scss', 'home.scss' ]
 get_remote_dir(styles, 'app/javascript/styles')
-packs = [ 'application.js', 'ga.js.erb' ]
+packs = [ 'application.js' ]
 get_remote_dir(packs, 'app/javascript/packs')
 
+say 'Applying google anlytics...'
+packs = [ 'ga.js.erb' ]
+get_remote_dir(packs, 'app/javascript/packs')
+after_bundle do
+  rails_command 'webpacker:install:erb'
+  remove_file('app/javascript/packs/hello_erb.js.erb')
+end
 
 say 'Applying simple_form...'
 gem 'simple_form', '~> 4.1'
