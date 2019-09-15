@@ -12,10 +12,8 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
         li.nav-item
           = link_to admin_root_path, class: "nav-link #{admin_active_for(admin_root_path, current_path)}" do
             i.nav-icon.fas.fa-tachometer-alt
-            p
-              | Dashboard
+            span Dashboard
         li.nav-item
           = link_to '#', class: "nav-link" do
             i.nav-icon.fas.fa-th
-            p
-              | Your menu
+            span Your menu
