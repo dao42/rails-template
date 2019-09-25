@@ -150,7 +150,7 @@ after_bundle do
 end
 
 say 'Applying redis & sidekiq...'
-gem 'sidekiq'
+gem 'sidekiq', '~> 5'
 get_remote('config/initializers/sidekiq.rb')
 get_remote('config/sidekiq.yml')
 get_remote('config/routes.rb')
