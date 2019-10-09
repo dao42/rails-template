@@ -17,8 +17,8 @@ Model.new(:myapp, 'Description for myapp') do
   end
 
   archive :rails_config do |archive|
-    archive.add "/data/www/myapp/shared/config/application.yml"
-    archive.add "/data/www/myapp/shared/config/database.yml"
+    archive.add "/data/www/myapp/shared/config/"
+    archive.add "/etc/nginx/conf.d/"
   end
 
   store_with Local do |local|
