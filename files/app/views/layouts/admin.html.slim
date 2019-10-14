@@ -19,7 +19,7 @@ html
     = stylesheet_pack_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload'
     = favicon_link_tag asset_pack_path("media/images/favicon.ico")
-  body.hold-transition.skin-blue.sidebar-mini class=body_class
+  body.hold-transition.skin-blue.sidebar-mini.layout-fixed.admin-page class=body_class
     - if @full_render
       = yield
     - else
