@@ -17,7 +17,7 @@ def get_remote(src, dest = nil)
   if ENV['RAILS_TEMPLATE_DEBUG'].present?
     repo = File.join(File.dirname(__FILE__), 'files/')
   else
-    repo = 'https://raw.github.com/dao42/rails-template/master/files/'
+    repo = 'https://raw.githubusercontent.com/dao42/rails-template/master/files/'
   end
   remote_file = repo + src
   get(remote_file, dest, force: true)
