@@ -289,5 +289,5 @@ after_bundle do
   git :init
   git add: '.'
   git commit: '-m "init rails with dao42/rails-template"'
-  say "Build successfully! Start `./bin/webpack-dev-server` first, then `cd #{app_name}` and input `rails s` to start your rails app..."
+  say "Build successfully! `cd #{app_name}` First, then start `./bin/webpack-dev-server` first, input `rails s` to start your rails app..."
 end
