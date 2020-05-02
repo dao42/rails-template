@@ -352,6 +352,7 @@ after_bundle do
   run 'rubocop -Ea -C true'
 end
 
+get_remote 'doc/development.md'
 get_remote 'editorconfig', '.editorconfig'
 get_remote 'ackrc', '.ackrc'
 get_remote 'bin/setup'
