@@ -311,6 +311,15 @@ after_bundle do
   end
 end
 
+say 'Applying Rubocop and Rails config tool...'
+gem_group :development do
+  gem 'rubocop-rails_config'
+end
+after_bundle do
+  generate 'rubocop_rails_config:install'
+  run 'rubocop -Ea -C true'
+end
+
 get_remote 'README.md'
 get_remote('editorconfig', '.editorconfig')
 get_remote 'ackrc', '.ackrc'
