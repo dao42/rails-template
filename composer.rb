@@ -278,6 +278,11 @@ if yes?('Add rspec test framework?')
   end
 end
 
+say 'Applying Brakeman static analysis tool...'
+gem_group :development do
+  gem 'brakeman', require: false
+end
+
 get_remote 'README.md'
 get_remote 'ackrc', '.ackrc'
 get_remote 'bin/setup'
