@@ -311,6 +311,11 @@ after_bundle do
   end
 end
 
+say 'Applying Solargraph IDE tools...'
+gem_group :development do
+  gem 'solargraph'
+end
+
 say 'Applying Rubocop and Rails config tool...'
 gem_group :development do
   gem 'rubocop-rails_config'
