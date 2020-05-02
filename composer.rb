@@ -258,6 +258,8 @@ inject_into_file 'config/application.rb', after: "class Application < Rails::App
 EOF
 end
 
+get_remote 'README.md'
+
 if yes?('Add rspec test framework?')
   say 'Applying rspec test framework...'
   gem_group :development do
@@ -272,9 +274,22 @@ if yes?('Add rspec test framework?')
     gem 'database_cleaner'
     gem 'launchy'
     gem 'selenium-webdriver'
+    gem 'shoulda-matchers'
   end
   after_bundle do
     generate 'testing:configure', 'rspec --force'
+    get_remote 'spec/support/shoulda_matchers.rb'
+  end
+else
+  say 'Applying minitest test framework...'
+  gsub_file('README.md', '* rspec', '* minitest')
+  gem_group :test do
+    gem 'capybara'
+    gem 'database_cleaner'
+    gem 'rails-controller-testing'
+    gem 'selenium-webdriver'
+    gem 'shoulda', '~> 3.5'
+    gem 'shoulda-matchers', '~> 2.0'
   end
 end
 
@@ -337,7 +352,6 @@ after_bundle do
   run 'rubocop -Ea -C true'
 end
 
-get_remote 'README.md'
 get_remote 'editorconfig', '.editorconfig'
 get_remote 'ackrc', '.ackrc'
 get_remote 'bin/setup'
