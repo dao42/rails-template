@@ -283,6 +283,11 @@ gem_group :development do
   gem 'brakeman', require: false
 end
 
+say 'Applying bundler-audit patch-level verification tool...'
+gem_group :development do
+  gem 'bundler-audit', require: false
+end
+
 get_remote 'README.md'
 get_remote 'ackrc', '.ackrc'
 get_remote 'bin/setup'
