@@ -44,6 +44,21 @@ remove_comment_of_gem
 get_remote('gitignore', '.gitignore')
 
 # postgresql
+if yes?('Start postgres in a docker container?')
+  postgres = run 'docker ps -a | grep postgres'
+  if postgres.present?
+    say 'Postgres is already running in docker. Nothing to do.'
+  else
+    say 'Creating pgdata volume in docker...'
+    run 'docker volume create pgdata'
+    say 'Starting postgres in docker...'
+    run 'docker run -it --rm -d -p 5432:5432 \
+            -v pgdata:/var/lib/postgresql/data \
+            -e POSTGRES_PASSWORD=postgres --name postgres postgres'
+  end
+end
+get_remote 'doc/docker.md'
+
 say 'Applying postgresql...'
 remove_gem('sqlite3')
 gem 'pg', '>= 1.1'
