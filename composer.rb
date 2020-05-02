@@ -45,7 +45,7 @@ get_remote('gitignore', '.gitignore')
 
 # postgresql
 if yes?('Start postgres in a docker container?')
-  postgres = run 'docker ps -a | grep postgres'
+  postgres = `docker ps -a | grep postgres`
   if postgres.present?
     say 'Postgres is already running in docker. Nothing to do.'
   else
