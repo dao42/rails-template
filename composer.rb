@@ -311,6 +311,11 @@ after_bundle do
   end
 end
 
+say 'Applying LicenseFinder tool...'
+gem_group :development do
+  gem 'license_finder'
+end
+
 say 'Applying Solargraph IDE tools...'
 gem_group :development do
   gem 'solargraph'
