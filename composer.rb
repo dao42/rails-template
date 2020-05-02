@@ -312,6 +312,7 @@ after_bundle do
 end
 
 get_remote 'README.md'
+get_remote('editorconfig', '.editorconfig')
 get_remote 'ackrc', '.ackrc'
 get_remote 'bin/setup'
 
