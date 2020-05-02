@@ -26,6 +26,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Ignore Spring files.
+/spring/*.pid
+
 /public/packs
 /public/packs-test
 /node_modules
@@ -49,3 +52,8 @@ yarn-debug.log*
 .env
 .byebug_history
 .DS_Store
+
+.vscode
+.idea/
+/*.iml
+coverage
