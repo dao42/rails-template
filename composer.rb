@@ -311,6 +311,13 @@ after_bundle do
   end
 end
 
+say 'Applying Pry as your rails console...'
+gem_group :development do
+  gem 'pry-rails'
+  gem 'pry-byebug', platform: :ruby
+end
+get_remote 'pryrc', '.pryrc'
+
 say 'Applying LicenseFinder tool...'
 gem_group :development do
   gem 'license_finder'
@@ -331,7 +338,7 @@ after_bundle do
 end
 
 get_remote 'README.md'
-get_remote('editorconfig', '.editorconfig')
+get_remote 'editorconfig', '.editorconfig'
 get_remote 'ackrc', '.ackrc'
 get_remote 'bin/setup'
 
