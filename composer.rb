@@ -43,6 +43,11 @@ remove_comment_of_gem
 # gitignore
 get_remote('gitignore', '.gitignore')
 
+# lock sprockets to 3.7 ignore this issue: https://github.com/rails/sprockets-rails/issues/444
+gem 'sprockets-rails', '~> 3.2.1'
+gem 'sprockets', '~> 3.7.2'
+gem 'sassc-rails'
+
 # postgresql
 say 'Applying postgresql...'
 remove_gem('sqlite3')
