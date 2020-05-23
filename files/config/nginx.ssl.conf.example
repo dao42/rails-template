@@ -15,8 +15,6 @@ server {
   server_name example.com;
   root /data/www/myapp/current/public;
 
-  ssl on;
-
   # FIXME: update your domain here
   ssl_certificate  /etc/nginx/sslkeys/yourdomain.com.key.pem;
   ssl_certificate_key /etc/nginx/sslkeys/yourdomain.com.key;
