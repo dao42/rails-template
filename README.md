@@ -96,21 +96,21 @@ Other gems integrated in rails-template are worth learning seriously.
 
 ## Integrated mainly technology stack and gems
 
-* Ruby on Rails 6.0
-* bootstrap 4
-* font-awesome 5
-* figaro
-* postgres
-* slim
-* simple_form
-* high_voltage
-* active_storage
-* sidekiq
-* kaminari
-* mina
-* puma
-* rspec
-* adminlte 3
+* [Ruby on Rails 6.0](https://github.com/rails)
+* [bootstrap 4](https://github.com/twbs)
+* [font-awesome 5](https://github.com/FortAwesome)
+* [figaro](https://github.com/laserlemon/figaro)
+* [postgres](https://www.postgresql.org/)
+* [slim](https://github.com/slim-template/slim)
+* [simple_form](https://github.com/heartcombo/simple_form)
+* [high_voltage](https://github.com/thoughtbot/high_voltage)
+* [active_storage](https://github.com/rails/rails/tree/master/activestorage)
+* [sidekiq](https://github.com/mperham/sidekiq)
+* [kaminari](https://github.com/kaminari/kaminari)
+* [mina](https://github.com/mina-deploy/mina)
+* [puma](https://github.com/puma/puma)
+* [rspec](https://github.com/rspec)
+* [adminlte 3](https://github.com/ColorlibHQ/AdminLTE)
 
 ## Starting with webpacker document
 
