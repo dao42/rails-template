@@ -1,6 +1,6 @@
 # dao42/rails-template
 
-**dao42/rails-template has supported the newest rails 6.0.0 project setup**
+**dao42/rails-template has supported the newest rails 6.1.x project setup**
 
 Maybe the best & newest & fastest rails template for senior rails developer.
 
@@ -32,16 +32,16 @@ Install dependencies:
 
 * rails 6
 
-    Using `rbenv`, update `ruby` up to 2.5 or higher, and install `rails 6.0.0`
+    Using `rbenv`, update `ruby` up to 2.7 or higher, and install `rails 6.1.x`
 
     ```bash
-    $ ruby -v ( output should be 2.5.x or 2.6.x )
+    $ ruby -v ( output should be 2.7.x or 3.x )
 
     $ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.com/` (optional, Chinese developer recommend)
 
     $ gem install rails
 
-    $ rails -v ( output should be rails 6.0.0 )
+    $ rails -v ( output should be rails 6.1.x )
     ```
 
 * yarn
@@ -130,6 +130,7 @@ Welcome to pull request here to update this if you choose `dao42/rails-template`
 
 * [danmai weapp SAAS platform](https://www.danmai.com.cn)
 * [dao42 official website](https://www.dao42.com)
+* [showmebug](https://www.showmebug.com)
 
 ## LICENSE
 

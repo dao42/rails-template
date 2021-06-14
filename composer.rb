@@ -71,7 +71,7 @@ say 'Applying jquery & font-awesome & bootstrap4...'
 after_bundle do
   yarn 'webpack@^4.0.0'
   yarn 'jquery@^3.3.1'
-  yarn 'expose-loader'
+  yarn 'expose-loader@^1.0.0'
   inject_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')\n" do <<~EOF
 
     const webpack = require('webpack')
@@ -84,14 +84,15 @@ after_bundle do
     }))
 
     environment.loaders.append('expose', {
-        test: require.resolve('jquery'),
-        use: [{
-            loader: 'expose-loader',
-            options: '$'
-        }, {
-            loader: 'expose-loader',
-            options: 'jQuery',
-        }]
+      test: require.resolve('jquery'),
+      use: [
+        {
+          loader: "expose-loader",
+          options: {
+            exposes: ["$", "jQuery"]
+          }
+        }
+      ]
     })
 
     EOF
@@ -229,7 +230,7 @@ EOF
 end
 
 say 'Applying kaminari & rails-i18n...'
-gem 'kaminari', '~> 1.1.1'
+gem 'kaminari', github: 'kaminari/kaminari'
 gem 'rails-i18n', '~> 6.0.0'
 after_bundle do
   generate 'kaminari:config'
@@ -272,10 +273,8 @@ gem_group :development, :test do
   gem 'factory_bot_rails'
 end
 gem_group :test do
-  gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
 end
 after_bundle do
   generate 'testing:configure', 'rspec --force'
