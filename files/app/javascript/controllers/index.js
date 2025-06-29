@@ -4,3 +4,6 @@
 import { Application } from "@hotwired/stimulus"
 
 const application = Application.start()
+
+import AdminHelloController from "./admin_hello_controller"
+application.register("admin-hello", AdminHelloController)

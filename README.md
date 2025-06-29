@@ -8,7 +8,7 @@ Maybe the best & newest & fastest rails template for senior rails developer.
 
 It maybe the best starting for your new rails project.
 
-An example built with rails-template: https://github.com/dao42/rails-template-7-example
+An example built with rails-template: https://github.com/dao42/rails-template-7x-example
 
 
 ## Core Idea
@@ -64,7 +64,8 @@ Then,
 
 2. Create your own rails app applying `rails-template`
 
-    `$ rails new myapp -J -m https://raw.githubusercontent.com/dao42/rails-template/master/composer.rb`
+    // -A: no pipeline, -J: no js( rails-template will create them by self)
+    `$ rails new myapp -A -J -m https://raw.githubusercontent.com/dao42/rails-template/master/composer.rb`
 
     Important!! replace `myapp` to your real project name, we will generate lots of example files by this name.
 

@@ -80,6 +80,8 @@ get_remote_dir(controllers_jss, 'app/javascript/controllers/')
 images = ['favicon.ico', 'logo.png', 'admin-user.jpg']
 get_remote_dir(images, 'app/assets/images')
 
+get_remote('app/assets/builds/.keep')
+
 styles = ['application.scss', 'bootstrap_custom.scss', 'fontawsome_custom.scss', 'home.scss', 'admin.scss']
 get_remote_dir(styles, 'app/assets/stylesheets/')
 
@@ -122,6 +124,10 @@ gem 'jsbundling-rails'
 gem 'propshaft', '~> 1.1.0'
 get_remote('Procfile.dev')
 get_remote('bin/dev')
+after_bundle do
+  run('chmod +x bin/dev')
+  run('yarn install')
+end
 
 # say "Applying browser_warrior..."
 # gem 'browser_warrior', '>= 0.11.0'
@@ -220,5 +226,5 @@ after_bundle do
   git :init
   git add: '.'
   git commit: '-m "init rails with dao42/rails-template"'
-  say 'Build successfully! input `rails s` to start your rails app...'
+  say 'Build successfully! input `bin/dev` to start your rails app...'
 end
