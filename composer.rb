@@ -1,6 +1,6 @@
 def remove_gem(*names)
   names.each do |name|
-    gsub_file 'Gemfile', /gem '#{name}'.*\n/, ''
+    gsub_file 'Gemfile', /gem ['"]#{name}['"].*\n/, ''
   end
 end
 
@@ -35,6 +35,10 @@ def yarn(lib)
   run("yarn add #{lib}")
 end
 
+def yarn_dev(lib)
+  run("yarn add --dev #{lib}")
+end
+
 def remove_dir(dir)
   run("rm -rf #{dir}")
 end
@@ -42,11 +46,6 @@ end
 remove_comment_of_gem
 # gitignore
 get_remote('gitignore', '.gitignore')
-
-# lock sprockets to 3.7 ignore this issue: https://github.com/rails/sprockets-rails/issues/444
-gem 'sprockets-rails', '~> 3.2.1'
-gem 'sprockets', '~> 3.7.2'
-gem 'sassc-rails'
 
 # postgresql
 say 'Applying postgresql...'
@@ -62,63 +61,31 @@ get_remote('config/application.yml.example')
 get_remote('config/application.yml.example', 'config/application.yml')
 get_remote('config/spring.rb')
 
-after_bundle do
-  say "Stop spring if exists"
-  run "spring stop"
-end
-
 say 'Applying jquery & font-awesome & bootstrap4...'
-after_bundle do
-  yarn 'webpack@^4.0.0'
-  yarn 'jquery@^3.3.1'
-  yarn 'expose-loader@^1.0.0'
-  inject_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')\n" do <<~EOF
+get_remote('package.json')
 
-    const webpack = require('webpack')
+say 'Applying javascript & stylesheets from remote files...'
+jss = ['base.js', 'application.js', 'admin.js']  #'ga.js.erb'
+get_remote_dir(jss, 'app/javascript/')
 
-    environment.plugins.append('Provide', new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Popper: ['popper.js', 'default']
-    }))
+admin_jss = ['sidebar.js']
+get_remote_dir(admin_jss, 'app/javascript/admin/')
 
-    environment.loaders.append('expose', {
-      test: require.resolve('jquery'),
-      use: [
-        {
-          loader: "expose-loader",
-          options: {
-            exposes: ["$", "jQuery"]
-          }
-        }
-      ]
-    })
+libs_jss = ['add_jquery.js']
+get_remote_dir(libs_jss, 'app/javascript/libs/')
 
-    EOF
-  end
-  yarn '@fortawesome/fontawesome-free@^5.9.0'
-  yarn 'popper.js@^1.14.7'
-  yarn 'bootstrap@^4.3.1'
-end
+controllers_jss = ['index.js', 'admin_hello_controller.js']
+get_remote_dir(controllers_jss, 'app/javascript/controllers/')
 
-remove_dir 'app/assets'
-jss = [ 'base.js' ]
-get_remote_dir(jss, 'app/javascript/js')
-images = [ 'favicon.ico' ]
-get_remote_dir(images, 'app/javascript/images')
-styles = [ 'application.scss', 'bootstrap_custom.scss', 'home.scss' ]
-get_remote_dir(styles, 'app/javascript/styles')
-packs = [ 'application.js' ]
-get_remote_dir(packs, 'app/javascript/packs')
+images = ['favicon.ico', 'logo.png', 'admin-user.jpg']
+get_remote_dir(images, 'app/assets/images')
 
-say 'Applying google anlytics...'
-packs = [ 'ga.js.erb' ]
-get_remote_dir(packs, 'app/javascript/packs')
-after_bundle do
-  rails_command 'webpacker:install:erb'
-  remove_file('app/javascript/packs/hello_erb.js.erb')
-end
+styles = ['application.scss', 'bootstrap_custom.scss', 'fontawsome_custom.scss', 'home.scss', 'admin.scss']
+get_remote_dir(styles, 'app/assets/stylesheets/')
+
+say 'Applying assets from remote files...'
+assets = ['assets.rb']
+get_remote_dir(assets, 'config/initializers/')
 
 say 'Applying simple_form...'
 gem 'simple_form', '~> 4.1'
@@ -144,80 +111,44 @@ EOF
 end
 
 # active_storage
-say 'Applying active_storage...'
-after_bundle do
-  rails_command 'active_storage:install'
-end
+# say 'Applying active_storage...'
+# after_bundle do
+  # rails_command 'active_storage:install'
+# end
 
-say "Applying browser_warrior..."
-gem 'browser_warrior', '>= 0.11.0'
-after_bundle do
-  generate 'browser_warrior:install'
-end
+say 'Applying propshaft & css & js...'
+gem 'cssbundling-rails'
+gem 'jsbundling-rails'
+gem 'propshaft', '~> 1.1.0'
+get_remote('Procfile.dev')
+get_remote('bin/dev')
+
+# say "Applying browser_warrior..."
+# gem 'browser_warrior', '>= 0.11.0'
+# after_bundle do
+  # generate 'browser_warrior:install'
+# end
 
 say 'Applying redis & sidekiq...'
-gem 'sidekiq', '~> 5'
+gem 'sidekiq', '~> 7'
 get_remote('config/initializers/sidekiq.rb')
 get_remote('config/sidekiq.yml')
 get_remote('config/routes.rb')
 get_remote('config/secret.yml')
 
-say 'Applying adminlte 3...'
-after_bundle do
-  yarn 'admin-lte@^3.0.0-beta.1'
-  yarn 'daterangepicker@^3.0.5'
-  yarn 'moment-timezone'
-  yarn 'tempusdominus-core'
-end
-
-styles = [ 'admin.scss' ]
-get_remote_dir(styles, 'app/javascript/styles')
-images = [ 'admin-user.jpg', 'logo.png' ]
-get_remote_dir(images, 'app/javascript/images')
-packs = [ 'admin.js' ]
-get_remote_dir(packs, 'app/javascript/packs')
-admin_jss = [ 'sidebar.js' ]
-get_remote_dir(admin_jss, 'app/javascript/js/admin')
-
-controllers = [ 'accounts_controller.rb', 'base_controller.rb', 'dashboard_controller.rb', 'sessions_controller.rb' ]
+controllers = ['accounts_controller.rb', 'base_controller.rb', 'dashboard_controller.rb', 'sessions_controller.rb']
 get_remote_dir(controllers, 'app/controllers/admin')
-accounts_views = [ 'edit.html.slim' ]
+accounts_views = ['edit.html.slim']
 get_remote_dir(accounts_views, 'app/views/admin/accounts')
-dashboard_views = [ 'index.html.slim' ]
+dashboard_views = ['index.html.slim']
 get_remote_dir(dashboard_views, 'app/views/admin/dashboard')
-sessions_views = [ 'new.html.slim' ]
+sessions_views = ['new.html.slim']
 get_remote_dir(sessions_views, 'app/views/admin/sessions')
-shared_admin_layouts = [ '_flash_messages.html.slim', '_header.html.slim', '_sidebar.html.slim' ]
+shared_admin_layouts = ['_flash_messages.html.slim', '_header.html.slim', '_sidebar.html.slim']
 get_remote_dir(shared_admin_layouts, 'app/views/shared/admin')
-admin_layouts = [ 'admin.html.slim' ]
+admin_layouts = ['admin.html.slim']
 get_remote_dir(admin_layouts, 'app/views/layouts')
-inject_into_file 'config/routes.rb', after: "Rails.application.routes.draw do\n" do <<-EOF
 
-  namespace :admin do
-    get 'login', to: 'sessions#new', as: :login
-    post 'login', to: 'sessions#create'
-    delete 'logout', to: 'sessions#destroy', as: :logout
-    resource :account, only: [:edit, :update]
-
-    root to: 'dashboard#index'
-  end
-EOF
-end
-# secure access for sidekiq
-inject_into_file 'config/routes.rb', after: "Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]\n" do <<-EOF
-
-class AdminConstraint
-  def matches?(request)
-    return false unless request.session[:current_admin_id].present?
-    admin = Administrator.find_by(id: request.session[:current_admin_id])
-    admin.present?
-  end
-end
-EOF
-end
-inject_into_file 'config/routes.rb', after: "mount Sidekiq::Web => '/sidekiq'" do
-  ', constraints: AdminConstraint.new'
-end
 # add db seeds
 get_remote('db/seeds.rb')
 gem 'bcrypt'
@@ -230,12 +161,12 @@ EOF
 end
 
 say 'Applying kaminari & rails-i18n...'
-gem 'kaminari', github: 'kaminari/kaminari'
-gem 'rails-i18n', '~> 6.0.0'
-after_bundle do
-  generate 'kaminari:config'
-  generate 'kaminari:views', 'bootstrap4'
-end
+gem 'kaminari'
+gem 'rails-i18n', '~> 7.0.10'
+# after_bundle do
+  # generate 'kaminari:config'
+  # generate 'kaminari:views', 'bootstrap4'
+# end
 
 say 'Applying mina & its plugins...'
 gem 'mina', '~> 1.2.2', require: false
@@ -257,10 +188,6 @@ say 'Applying application config...'
 inject_into_file 'config/application.rb', after: "class Application < Rails::Application\n" do <<-EOF
     config.generators.assets = false
     config.generators.helper = false
-
-    config.time_zone = 'Beijing'
-    config.i18n.available_locales = [:en, :'zh-CN']
-    config.i18n.default_locale = :'zh-CN'
 EOF
 end
 
@@ -293,5 +220,5 @@ after_bundle do
   git :init
   git add: '.'
   git commit: '-m "init rails with dao42/rails-template"'
-  say "Build successfully! `cd #{app_name}` First, then start `./bin/webpack-dev-server` first, input `rails s` to start your rails app..."
+  say 'Build successfully! input `rails s` to start your rails app...'
 end

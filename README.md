@@ -1,12 +1,14 @@
 # dao42/rails-template
 
-**dao42/rails-template has supported the newest rails 6.1.x project setup**
+**dao42/rails-template has supported the newest rails 7.2.x project setup**
+
+~~dao42/rails-template has supported the newest rails 6.1.x project setup~~
 
 Maybe the best & newest & fastest rails template for senior rails developer.
 
 It maybe the best starting for your new rails project.
 
-An example built with rails-template: https://github.com/dao42/rails-template-example
+An example built with rails-template: https://github.com/dao42/rails-template-7-example
 
 
 ## Core Idea
@@ -14,7 +16,7 @@ An example built with rails-template: https://github.com/dao42/rails-template-ex
 `dao42/rails-template` apply lots of good components for you to make development damn quick.
 
 1. `dao42/rails-template` keep the newest easily because it's a real `Rails Application Template`.
-2. `dao42/rails-template` love the newest standard components of Rails 6, using `webpacker` and remove `assets pipeline`.
+2. `dao42/rails-template` love the newest standard components of Rails 7, using `propshaft`
 3. `dao42/rails-template` is out-of-box for your development based on `bootstrap4`.
 4. `dao42/rails-template` is out-of-box for your deployment based on `mina`.
 
@@ -32,16 +34,16 @@ Install dependencies:
 
 * rails 6
 
-    Using `rbenv`, update `ruby` up to 2.7 or higher, and install `rails 6.1.x`
+    Using `rbenv`, update `ruby` up to 3.x, and install `rails 6.1.x`
 
     ```bash
-    $ ruby -v ( output should be 2.7.x or 3.x )
+    $ ruby -v ( output should be 3.x )
 
     $ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.com/` (optional, Chinese developer recommend)
 
     $ gem install rails
 
-    $ rails -v ( output should be rails 6.1.x )
+    $ rails -v ( output should be rails 7.2.x )
     ```
 
 * yarn
@@ -62,19 +64,19 @@ Then,
 
 2. Create your own rails app applying `rails-template`
 
-    `$ rails new myapp -m https://raw.githubusercontent.com/dao42/rails-template/master/composer.rb`
+    `$ rails new myapp -J -m https://raw.githubusercontent.com/dao42/rails-template/master/composer.rb`
 
     Important!! replace `myapp` to your real project name, we will generate lots of example files by this name.
 
 3. Done! Trying to start it.
 
-    `$ rails s`
+    `$ bin/dev`
 
 ## What we do
 
 `rails-template` apply lots of good components for you to make development damn quick.
 
-1. `ActionCable` and `Turbolinks` features are opened by default.
+1. `ActionCable` and `Turbo` features are opened by default.
 
 2. `Bootstrap4` and `font-awesome` are integrated to make your products UI easily, it aslo has some example pages for you to quickly start.
 
@@ -84,7 +86,7 @@ Then,
 
 5. `slim`, `simple_form`, `kaminari`, `high_voltage` are installed.
 
-6. `adminlte 3` is ready for your administrator dashboard.
+6. `adminlte 4` is ready for your administrator dashboard.
 
 7. `rspec`, `factory_bot_rails`, `database_cleaner` are ready for your testing automation.
 
@@ -96,7 +98,7 @@ Other gems integrated in rails-template are worth learning seriously.
 
 ## Integrated mainly technology stack and gems
 
-* [Ruby on Rails 6.0](https://github.com/rails)
+* [Ruby on Rails 7.0](https://github.com/rails)
 * [bootstrap 4](https://github.com/twbs)
 * [font-awesome 5](https://github.com/FortAwesome)
 * [figaro](https://github.com/laserlemon/figaro)
@@ -110,19 +112,11 @@ Other gems integrated in rails-template are worth learning seriously.
 * [mina](https://github.com/mina-deploy/mina)
 * [puma](https://github.com/puma/puma)
 * [rspec](https://github.com/rspec)
-* [adminlte 3](https://github.com/ColorlibHQ/AdminLTE)
-
-## Starting with webpacker document
-
-* [Starting with webpacker for Rails 6(zh-CN)](https://ruby-china.org/topics/38832)
+* [adminlte 4](https://github.com/ColorlibHQ/AdminLTE)
 
 ## Deployment document
 
 * [How to deploy to ubuntu 16.10 with rails-template step by step(zh-CN)](https://github.com/dao42/rails-template/wiki/how-to-deploy-rails-to-ubuntu1404-with-rails-template)
-
-## Roadmap
-
-* [x] Add AdminLTE as admin dashboard
 
 ## Projects that using `dao42/rails-template`
 

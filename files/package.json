@@ -1,0 +1,34 @@
+{
+  "name": "app",
+  "private": true,
+  "devDependencies": {
+    "esbuild": "^0.25.5"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
+    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css ./app/assets/stylesheets/admin.scss:./app/assets/builds/admin.css --no-source-map --load-path=node_modules --silence-deprecation=import --quiet-deps",
+    "watch:css": "nodemon --watch ./app/assets/stylesheets/ --ext scss --exec \"yarn build:css\""
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.16",
+    "@popperjs/core": "^2.11.8",
+    "admin-lte": "^4.0.0-beta3",
+    "autoprefixer": "^10.4.21",
+    "bootstrap": "^4.3.1",
+    "bootstrap-icons": "^1.13.1",
+    "daterangepicker": "^3.0.5",
+    "jquery": "^3.3.1",
+    "moment-timezone": "^0.6.0",
+    "nodemon": "^3.1.10",
+    "popper.js": "^1.14.7",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "sass": "^1.89.2",
+    "tempusdominus-core": "^5.19.3"
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}

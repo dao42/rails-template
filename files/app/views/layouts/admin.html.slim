@@ -8,42 +8,31 @@ html
     meta http-equiv="cleartype" content="on"
     meta name="HandheldFriendly" content="True"
     meta name="MobileOptimized" content="320"
-    meta name="turbolinks-cache-control" content="no-cache"
+    meta name="turbo-cache-control" content="no-cache"
     - if content_for?(:title)
       title = format("%s - Dashboard", yield(:title))
     - else
-      title myapp Dashboard
+      title Admin Dashboard
     = csrf_meta_tags
     = action_cable_meta_tag
     = content_for?(:head) ? yield(:head) : ''
-    = stylesheet_pack_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload'
-    = favicon_link_tag asset_pack_path("media/images/favicon.ico")
-  body.hold-transition.skin-blue.sidebar-mini.layout-fixed.admin-page class=body_class
+    = stylesheet_link_tag 'admin', media: 'all', 'data-turbo-track': 'reload'
+    = javascript_include_tag 'admin', 'data-turbo-track': Rails.env.production? ? "reload" : "", type: "module"
+    = favicon_link_tag asset_path("favicon.ico")
+  body.layout-fixed.sidebar-expand-lg.bg-body-tertiary.app-loaded.sidebar-open.admin-page class=body_class
     - if @full_render
       = yield
     - else
-      main.wrapper
+      .app-wrapper
         = render 'shared/admin/header'
         = render 'shared/admin/sidebar'
-        .content-wrapper
-          section.content-messages
+        main.app-main
+          .content-messages
             = render 'shared/admin/flash_messages'
-          section.content-header
-          section.content
+          .app-content-header
+          .app-content
             = yield
-        aside.control-sidebar.control-sidebar-dark
-          /! Control sidebar content goes here
-          .p-3
-            h5 Title
-            p Sidebar content
-        /! /.control-sidebar
-        /! Main Footer
-        footer.main-footer
-          /! To the right
-          .float-right.d-none.d-sm-inline
+        .app-footer data-controller='admin-hello'
+          .float-end.d-none.d-sm-inline
             | Anything you want
-          /! Default to the left
-          strong
-            | Copyright &copy; 2019 - All rights reserved.
-          | Theme by AdminLTE.io
+          strong data-admin-hello-target='hello'

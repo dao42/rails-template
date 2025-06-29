@@ -13,18 +13,16 @@ Install dependencies:
 
     Ensure you have already initialized a user with username: `postgres` and password: `postgres`( e.g. using `$ createuser -d postgres` command creating one )
 
-* rails 6
+* rails 7
 
-    Using `rbenv`, update `ruby` up to 2.5 or higher, and install `rails 6.0.0`
+    Using `rbenv`, update `ruby` up to 3.x, and install `rails 7.x`
 
     ```bash
-    $ ruby -v ( output should be 2.5.x or 2.6.x )
-
-    $ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.com/` (optional, Chinese developer recommend)
+    $ ruby -v ( output should be 3.x )
 
     $ gem install rails
 
-    $ rails -v ( output should be rails 6.0.0 )
+    $ rails -v ( output should be rails 7.x )
     ```
 
 * yarn
@@ -32,16 +30,19 @@ Install dependencies:
     Install `yarn` for webpacker( see install document: https://yarnpkg.com/en/docs/install)
 
     ```bash
-    $ yarn --version( output should be 1.6.x or higher )
+    $ yarn --version ( output should be 1.6.x or higher )
     ```
-Then,
 
+Install dependencies, setup db:
 ```bash
 $ ./bin/setup
-$ ./bin/webpack-dev-server
-# open new terminal tab
+```
+
+Start it:
+```
 $ rails s
 ```
+
 
 ## Admin dashboard info
 
@@ -53,7 +54,7 @@ Default password: admin
 
 ## Tech stack
 
-* Ruby on Rails 6.0
+* Ruby on Rails 7.x
 * bootstrap 4
 * font-awesome 5
 * figaro

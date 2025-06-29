@@ -1,5 +1,6 @@
-@import 'bootstrap_custom';
-@import 'admin-lte/dist/css/adminlte';
+@use 'fontawsome_custom';
+@use 'bootstrap_custom';
+@use 'admin-lte/dist/css/adminlte';
 
 .main-sidebar {
   li.nav-item {

@@ -1,0 +1,8 @@
+@use "sass:color";
+
+// $link-color:                              #2199e8 !default;
+// $link-decoration:                         none !default;
+// $link-hover-color:                        color.adjust($link-color, $lightness: -15%) !default;
+// $link-hover-decoration:                   none !default;
+
+@forward 'bootstrap/scss/bootstrap';

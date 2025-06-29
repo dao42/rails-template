@@ -2,13 +2,36 @@
 aside.main-sidebar.sidebar-dark-primary.elevation-4
   /! Brand Logo
   a.brand-link href=admin_root_path
-    = image_pack_tag 'logo.png', class: 'brand-image img-circle elevation-3'
+    = image_tag 'logo.png', class: 'brand-image img-circle elevation-3'
     span.brand-text.font-weight-light Dashboard
   /! Sidebar
   .sidebar
     /! Sidebar Menu
     nav.mt-2
       ul.nav.nav-pills.nav-sidebar.flex-column data-accordion="false" data-widget="treeview" role="menu"
+        li.nav-item
+          = link_to admin_root_path, class: "nav-link #{admin_active_for(admin_root_path, current_path)}" do
+            i.nav-icon.fas.fa-tachometer-alt
+            span Dashboard
+        li.nav-item
+          = link_to '#', class: "nav-link" do
+            i.nav-icon.fas.fa-th
+            span Your menu
+/! Main Sidebar Container
+aside.app-sidebar.bg-body-secondary.shadow data-bs-theme="dark"
+  .sidebar-brand
+    /! Brand Logo
+    a.brand-link href=admin_root_path
+      = image_tag 'logo.png', class: 'brand-image img-circle elevation-3'
+      span.brand-text.fw-light Dashboard
+    /! Sidebar
+  .sidebar-wrapper data-overlayscrollbars="host"
+    .os-size-observer
+      .os-size-observer-listener
+    /! Sidebar Menu
+    nav.mt-2
+      ul.nav.sidebar-menu.flex-column data-lte-toggle="treeview" data-accordion="false"
+        li.nav-header Menu
         li.nav-item
           = link_to admin_root_path, class: "nav-link #{admin_active_for(admin_root_path, current_path)}" do
             i.nav-icon.fas.fa-tachometer-alt
